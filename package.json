@@ -1,0 +1,49 @@
+{
+  "name": "better-place",
+  "version": "0.0.0",
+  "description": "PLACE, en mieux",
+  "author": "Michel Blancard",
+  "homepage": "https://github.com/michelbl/better-place#readme",
+  "license": "ISC",
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michelbl/better-place.git"
+  },
+  "bugs": {
+    "url": "https://github.com/michelbl/better-place/issues"
+  },
+  "keywords": [
+    "public",
+    "procurement",
+    "transparency",
+    "marchés",
+    "publics",
+    "achats",
+    "publics",
+    "accord",
+    "cadre",
+    "dossier",
+    "consultation",
+    "entreprises",
+    "PLACE",
+    "appel",
+    "offre",
+    "consultation",
+    "procedure",
+    "transparence"
+  ],
+
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "pug": "2.0.0-beta11",
+    "serve-favicon": "~2.4.5"
+  }
+}
