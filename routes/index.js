@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+const db = require('../db'); 
+
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  db.any('SELECT * FROM dce')
+  .then(function(dceList) {
+    res.render('index', { dceList });
+  })
+  .catch(function(error) {
+    res.send(JSON.stringify(error));
+  });
 });
 
 module.exports = router;
