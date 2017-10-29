@@ -25,7 +25,7 @@ router.get('/:annonce_id-:org_acronym', function(req, res, next) {
       const urlBase = '/files/' + annonceId + '-' + orgAcronym + '-' + documentType;
 
       var originalDoc = documents.filter((doc) => doc.is_in_archive === false);
-      var unzippedFiles = documents.filter((doc) => doc.is_in_archive === true).sort((a, b) => a.variable_part < b.variable_part);
+      var unzippedFiles = documents.filter((doc) => doc.is_in_archive === true).sort((a, b) => a.variable_part > b.variable_part);
       console.log(JSON.stringify(unzippedFiles));
       unzippedFiles = unzippedFiles.map((unzippedFiles) => {
         var fileData = {
