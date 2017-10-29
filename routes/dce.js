@@ -40,15 +40,18 @@ router.get('/:annonce_id-:org_acronym', function(req, res, next) {
       const originalName = dceData['filename_' + documentType];
 
       if (originalName === null) {
-        if (originalDoc !== []) {
+        if (originalDoc.length !== 0) {
           const error = new Error("Incoherent file storage");
+          return next(error);
         }
-        if (unzippedFiles !== []) {
+        if (unzippedFiles.length !== 0) {
           const error = new Error("Incoherent file storage");
+          return next(error);
         }
       } else {
-        if (originalDoc.len !== 1) {
+        if (originalDoc.length !== 1) {
           const error = new Error("Incoherent file storage");
+          return next(error);
         }
         originalDoc = {
           url: urlBase + originalDoc[0].ext,
