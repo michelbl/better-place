@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../db'); 
+const database = require('../database'); 
 
 
 const router = express.Router();
@@ -10,7 +10,7 @@ router.get('/:annonce_id-:org_acronym', async function(req, res, next) {
   let dceData;
 
   try {
-    dceData = await db.one('SELECT * FROM dce WHERE annonce_id = $1 AND org_acronym = $2', [annonceId, orgAcronym]);
+    dceData = await database.one('SELECT * FROM dce WHERE annonce_id = $1 AND org_acronym = $2', [annonceId, orgAcronym]);
   } catch(error) {
     const notFoundError = new Error("Not found");
     notFoundError.status = 404;

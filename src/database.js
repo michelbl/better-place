@@ -4,6 +4,6 @@ const config = require('./config');
 const pgp = require('pg-promise')(config.postgresql.initOptions);
 
 // Creating a new database instance from the connection details
-const db = pgp(config.postgresql.details);
+const database = pgp(config.postgresql.details);
 
-module.exports = db;
+module.exports = database;

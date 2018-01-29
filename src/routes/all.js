@@ -1,12 +1,12 @@
 const express = require('express');
-const db = require('../db'); 
+const database = require('../database'); 
 
 
 const router = express.Router();
 
 router.get('/', async function(req, res, next) {
   try {
-    const dceList = await db.any('SELECT * FROM dce')
+    const dceList = await database.any('SELECT * FROM dce')
     const data = {
       dceList,
       nbDce: dceList.length,

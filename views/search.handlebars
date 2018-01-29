@@ -1,4 +1,15 @@
 <h1>Rechercher un DCE</h1>
-<p>
-  todo...
-</p>
+
+<form action="/search">
+  <input type="text" name="q"><br>
+  <input type="submit" value="Rechercher">
+</form>
+
+
+<ul>
+  {{#each hitsIds}}
+    <li>
+      {{this}}
+    </li>
+  {{/each}}
+</ul>
