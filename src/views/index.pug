@@ -1,9 +1,0 @@
-extends layout
-
-block content
-  h1= 'Liste des DCE'
-  p Welcome here !
-  ul
-  each dce in dceList
-    li
-      a(href = 'dce/' + dce.annonce_id + '-' + dce.org_acronym)= dce.annonce_id + '-' + dce.org_acronym + ' ' + dce.intitule

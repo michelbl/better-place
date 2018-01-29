@@ -1,17 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 
-const db = require('../db'); 
 
+const router = express.Router();
 
 router.get('/', function(req, res, next) {
-  db.any('SELECT * FROM dce')
-  .then(function(dceList) {
-    res.render('index', { dceList });
-  })
-  .catch(function(error) {
-    res.send(JSON.stringify(error));
-  });
+  res.render('index', {});
 });
 
 module.exports = router;
