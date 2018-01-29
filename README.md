@@ -1,8 +1,13 @@
 
-`NODE_ENV=development npm run start`
-`NODE_ENV=production npm run start`
+## Install
 
-## TODO list
+Copy `config-sample.js` to `config.js` and write your settings.
 
-* ES6 (yield or async ?)
-* error handling
+```
+npm install
+```
+
+## Run
+
+`NODE_ENV=development npm start`
+`NODE_ENV=production npm start`

@@ -1,2 +1,2 @@
 node_modules
-config_prod.js
+src/config.js

@@ -1,0 +1,70 @@
+<h1>Détails sur un DCE</h1>
+
+<ul>
+  <li>
+    Identifiant PLACE de l'annonce : {{ dceData.annonce_id }}
+  </li>
+  <li>
+    Identifiant "org_acronym" : {{ dceData.org_acronym }}
+  </li>
+  <li>
+    Métadonnée "reference" : {{ dceData.reference }}
+  </li>
+  <li>
+    Métadonnée "intitule" : {{ dceData.intitule }}
+  </li>
+  <li>
+    Métadonnée "objet" : {{ dceData.objet }}
+  </li>
+  <li>
+    Date du téléchargement depuis PLACE : {{ dceData.fetch_datetime }}
+  </li>
+</ul>
+
+<h2>Avis</h2>
+
+<p>Liens BOAMP :</p>
+  <ul>
+    {{#each dceData.links_boamp}}
+      <li>
+        <a href={{this}}>{{this}}</a>
+      </li>
+    {{/each}}
+  </ul>
+
+<!--
+- var documentType = 'avis'
+if documentsByType[documentType]
+  p
+    a(href=documentsByType[documentType].originalDoc.url)= documentsByType[documentType].originalDoc.name
+  ul
+
+
+h2 Réglement
+p= 'Référence du réglement : ' + dceData.reglement_ref
+- var documentType = 'reglement'
+if documentsByType[documentType]
+  p
+    a(href=documentsByType[documentType].originalDoc.url)= documentsByType[documentType].originalDoc.name
+
+else
+  p Cette annonce de comprend pas de réglement.
+
+h2 Dossier de Consultation des Entreprises
+- var documentType = 'dce'
+if documentsByType[documentType]
+  p
+    a(href=documentsByType[documentType].originalDoc.url)= documentsByType[documentType].originalDoc.name
+
+else
+  p Cette annonce de comprend pas de DCE.
+
+h2 Complément
+- var documentType = 'complement'
+if documentsByType[documentType]
+  p
+    a(href=documentsByType[documentType].originalDoc.url)= documentsByType[documentType].originalDoc.name
+
+else
+  p Cette annonce de comprend pas de document complémentaire.
+  -->

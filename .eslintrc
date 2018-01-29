@@ -1,0 +1,14 @@
+{
+    "plugins": [
+      "node"
+    ],
+    "extends": [
+      "airbnb-base",
+      "eslint:recommended",
+      "plugin:node/recommended"
+    ],
+    "env": {
+      "node": true
+    }
+  }
+  

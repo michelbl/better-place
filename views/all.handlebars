@@ -1,0 +1,14 @@
+<h1>Liste des DCE</h1>
+<p>
+  {{ nbDce }} DCE
+</p>
+
+<ul>
+  {{#each dceList}}
+    <li>
+      <a href='dce/{{this.annonce_id}}-{{this.org_acronym}}'>
+        {{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}
+      </a>
+    </li>
+  {{/each}}
+</ul>
