@@ -5,16 +5,38 @@
     <meta name="description" content="Transparence sur la commande publique">
 
     <title>better-place</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.0/semantic.min.js"></script>
     <link href="/stylesheets/style.css" rel="stylesheet">
   </head>
   <body>
-    <header>
-      <div>
-        <a href="/">index</a>
-        <a href="/all">all</a>
-        <a href="/search">search</a>
-      </div>
-    </header>
+
+
+  <div class="ui fixed menu">
+    <div class="ui container">
+      <a href="/" class="header item">Better Place</a>
+      <a href="/all" class="item">Tous les DCE</a>
+      <a href="/search" class="item">Recherche</a>
+    </div>
+  </div>
+
+
+  <div class="ui main text container">
     {{{ body }}}
+  </div>
+
+
+  <div class="ui vertical footer segment">
+    <div class="ui center aligned container">
+      <div class="ui section divider"></div>
+      <div class="ui horizontal small divided link list">
+        <a class="item" href="https://github.com/michelbl/better-place">Code source</a>
+        <a class="item" href="https://github.com/michelbl/scraper-place">scraper-place</a>
+        <a class="item" href="https://ouvre-boite.org/">Ouvre-boîte</a>
+      </div>
+    </div>
+  </div>
+
+
   </body>
 </html>  

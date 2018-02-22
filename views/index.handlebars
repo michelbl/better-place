@@ -1,7 +1,51 @@
-<h1>scraper-place</h1>
+<h1 class="ui header">Better Place</h1>
+
 <p>
-  <a href='https://github.com/michelbl/scraper-place'>scraper-place</a>
+Better Place propose le téléchargement et la recherche sur des dossiers de marchés publics.
 </p>
+
 <p>
-  <a href='https://github.com/michelbl/better-place'>better-place</a>
+Les Dossiers de Consultation des Entreprises (DCE) sont récupérés depuis <a href='https://www.marches-publics.gouv.fr/'>PLACE</a> avec <a href='https://github.com/michelbl/scraper-place'>scraper-place</a>. Seuls les dossiers postés sur PLACE après novembre 2017 sont disponible.
 </p>
+
+<p>
+J'ai développé cet outil afin d'améliorer la transparence de la commande publique en France, mais il peut intéresser des entreprises et des administrations qui pourront trouveront des exemples de DCE.
+</p>
+
+
+<h2>Flux de données</h2>
+
+<p>
+Les nouveaux dossiers sont scrapés tous les matins puis publiés sur <a href='https://betterplace.info/'>https://betterplace.info/</a>.
+</p>
+
+<p>
+Chaque dossier est dupliqué sur AWS Glacier par précaution.
+</p>
+
+<p>
+La liste des dossiers est contenue dans une base PostgreSQL.
+</p>
+
+<p>
+L'extraction du contenu est effectuée avec Apache Tika. Pour pouvoir parser les gros dossiers (certains peuvent dépasser le giga-octet !) une instance AWS EC2 t2.large est utilisée pour cette étape.
+</p>
+
+<p>
+Le contenu extrait est indexé par ElasticSearch.
+</p>
+
+<p>
+Au bout de 3 mois de production (fin février 2017), 9000 dossiers on été indexés pour un total de 150Go. Cela représente environ 100 dossiers par jour et 50 Go par mois. L'index ElasticSearch pèse 2Go.
+</p>
+
+<p>
+Le coût des services nécessaires pour la mise en ligne de cet index se monte à :
+<ul>
+  <li>serveur online.net (serveur web + elasticsearch) : 15€/mois</li>
+  <li>AWS Glacier : 50c/mois</li>
+  <li>AWS EC2 : 1 x t2.large x 10mn/jour = 50c/mois</li>
+</ul>
+</p>
+
+Documentation et code source de <a href='https://github.com/michelbl/scraper-place'>scraper-place</a> et <a class="item" href="https://github.com/michelbl/better-place">Better Place</a> sur Github.

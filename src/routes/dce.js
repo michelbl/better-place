@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const database = require('../database');
-
+const { publicPath } = require('../config');
 
 const router = express.Router();
 
@@ -29,7 +29,7 @@ router.get('/:annonce_id-:org_acronym', async function(req, res, next) {
   } = dceData;
 
   const buildHref = (annonce_id, org_acronym, documentType, originalName) =>
-    `${annonce_id}-${org_acronym}-reglement${path.extname(originalName)}`;
+    `/${publicPath}${annonce_id}-${org_acronym}-reglement${path.extname(originalName)}`;
 
   const viewData = {
     place_metadata: {
