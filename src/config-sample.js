@@ -15,9 +15,10 @@ var config = {
     document_type: 'dce',
     initOptions: {
       host: 'localhost:9200',
-      log: 'trace',
+      log: 'warning',
     },
   },
+  publicPath: 'files/',
 };
 
 module.exports = config;
