@@ -2,69 +2,113 @@
 
 <ul>
   <li>
-    Identifiant PLACE de l'annonce : {{ dceData.annonce_id }}
+    Identifiant PLACE de l'annonce : {{ place_metadata.annonce_id }}
   </li>
   <li>
-    Identifiant "org_acronym" : {{ dceData.org_acronym }}
+    <a href='{{betterplace_metadata.original_url}}'>Lien original</a>
   </li>
   <li>
-    Métadonnée "reference" : {{ dceData.reference }}
+    Identifiant "org_acronym" : {{ place_metadata.org_acronym }}
   </li>
   <li>
-    Métadonnée "intitule" : {{ dceData.intitule }}
+    Métadonnée "reference" : {{ place_metadata.reference }}
   </li>
   <li>
-    Métadonnée "objet" : {{ dceData.objet }}
+    Métadonnée "intitule" : {{ place_metadata.intitule }}
   </li>
   <li>
-    Date du téléchargement depuis PLACE : {{ dceData.fetch_datetime }}
+    Métadonnée "objet" : {{ place_metadata.objet }}
+  </li>
+  <li>
+    Date du téléchargement depuis PLACE : {{ betterplace_metadata.fetch_datetime }}
+  </li>
+  <li>
+    Etat betterplace : {{ betterplace_metadata.state }}
   </li>
 </ul>
 
 <h2>Avis</h2>
 
 <p>Liens BOAMP :</p>
-  <ul>
-    {{#each dceData.links_boamp}}
-      <li>
-        <a href={{this}}>{{this}}</a>
-      </li>
-    {{/each}}
-  </ul>
+<ul>
+  {{#each place_metadata.links_boamp}}
+    <li>
+      <a href={{this}}>{{this}}</a>
+    </li>
+  {{/each}}
+</ul>
 
-<!--
-- var documentType = 'avis'
-if documentsByType[documentType]
-  p
-    a(href=documentsByType[documentType].originalDoc.url)= documentsByType[documentType].originalDoc.name
-  ul
+{{#if avis}}
+  {{#with avis}}
+    <a href={{href}}>{{filename}} ({{file_size}})</a>
+    <p>Glacier : {{glacier_id}}</p>
+    <ul>
+      {{#each embedded_filenames}}
+        <li>
+          {{this}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/with}}
+{{else}}
+  <p>Cette annonce de comprend pas d'avis.</p>
+{{/if}}
 
 
-h2 Réglement
-p= 'Référence du réglement : ' + dceData.reglement_ref
-- var documentType = 'reglement'
-if documentsByType[documentType]
-  p
-    a(href=documentsByType[documentType].originalDoc.url)= documentsByType[documentType].originalDoc.name
+<h2>Réglement</h2>
 
-else
-  p Cette annonce de comprend pas de réglement.
+<p>Référence du réglement : {{place_metadata.reglement_ref}}</p>
 
-h2 Dossier de Consultation des Entreprises
-- var documentType = 'dce'
-if documentsByType[documentType]
-  p
-    a(href=documentsByType[documentType].originalDoc.url)= documentsByType[documentType].originalDoc.name
+{{#if reglement}}
+  {{#with reglement}}
+    <a href={{href}}>{{filename}} ({{file_size}})</a>
+    <p>Glacier : {{glacier_id}}</p>
+    <ul>
+      {{#each embedded_filenames}}
+        <li>
+          {{this}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/with}}
+{{else}}
+  <p>Cette annonce de comprend pas de réglement.</p>
+{{/if}}
 
-else
-  p Cette annonce de comprend pas de DCE.
 
-h2 Complément
-- var documentType = 'complement'
-if documentsByType[documentType]
-  p
-    a(href=documentsByType[documentType].originalDoc.url)= documentsByType[documentType].originalDoc.name
+<h2>Dossier de Consultation des Entreprises</h2>
 
-else
-  p Cette annonce de comprend pas de document complémentaire.
-  -->
+{{#if dce}}
+  {{#with dce}}
+    <a href={{href}}>{{filename}} ({{file_size}})</a>
+    <p>Glacier : {{glacier_id}}</p>
+    <ul>
+      {{#each embedded_filenames}}
+        <li>
+          {{this}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/with}}
+{{else}}
+  <p>Cette annonce de comprend pas de dossier.</p>
+{{/if}}
+
+
+<h2>Complément</h2>
+
+{{#if complement}}
+  {{#with complement}}
+    <a href={{href}}>{{filename}} ({{file_size}})</a>
+    <p>Glacier : {{glacier_id}}</p>
+    <ul>
+      {{#each embedded_filenames}}
+        <li>
+          {{this}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/with}}
+{{else}}
+  <p>Cette annonce de comprend pas de complément.</p>
+{{/if}}
