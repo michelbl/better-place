@@ -67,15 +67,15 @@ router.get('/', async function(req, res, next) {
     }
 
     const getPagination = function(queryString, from, pageSize, nbHits) {
-      const currentPageIndex = Math.round(from / MAX_NB_HITS);
+      const currentPageIndex = Math.round(from / pageSize);
       const previousPageIndex = (currentPageIndex > 0) && (currentPageIndex - 1);
       const isLastPage = nbHits <= ((currentPageIndex + 1) * pageSize);
       const nextPageIndex = !isLastPage && (currentPageIndex + 1);
-
+    
       const firstPageHref = `/search?q=${queryString}`;
-      const previousPageHref = `/search?q=${queryString}&from=${previousPageIndex * MAX_NB_HITS}`;
-      const nextPageHref = `/search?q=${queryString}&from=${nextPageIndex * MAX_NB_HITS}`;
-
+      const previousPageHref = `/search?q=${queryString}&from=${previousPageIndex * pageSize}`;
+      const nextPageHref = `/search?q=${queryString}&from=${nextPageIndex * pageSize}`;
+    
       return {
         isLastPage,
         currentPageIndex, previousPageIndex, nextPageIndex,
@@ -83,7 +83,8 @@ router.get('/', async function(req, res, next) {
       }
     }
 
-    const pagination = validQueryString && getPagination(queryString, from, MAX_NB_HITS,  nbHits);
+    const pagination = validQueryString && getPagination(queryString, from, MAX_NB_HITS, nbHits);
+
 
     res.render('search', { validQueryString, queryString, nbHits, pagination, hitsData });
 
