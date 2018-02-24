@@ -13,7 +13,7 @@ J'ai développé cet outil afin d'améliorer la transparence de la commande publ
 </p>
 
 
-<h2>Flux de données</h2>
+<h2>Données</h2>
 
 <p>
 Les nouveaux dossiers sont scrapés tous les matins puis publiés sur <a href='https://betterplace.info/'>https://betterplace.info/</a>.
@@ -24,7 +24,7 @@ Chaque dossier est dupliqué sur AWS Glacier par précaution.
 </p>
 
 <p>
-La liste des dossiers est contenue dans une base PostgreSQL.
+La liste des dossiers est contenue dans une base PostgreSQL. Cette base est sauvegardée de manière hebdomadaire sur AWS S3.
 </p>
 
 <p>
@@ -36,16 +36,49 @@ Le contenu extrait est indexé par ElasticSearch.
 </p>
 
 <p>
-Au bout de 3 mois de production (fin février 2017), 9000 dossiers on été indexés pour un total de 150Go. Cela représente environ 100 dossiers par jour et 50 Go par mois. L'index ElasticSearch pèse 2Go.
+Au bout de 3 mois de production (fin février 2017), 9000 dossiers on été indexés pour un total de 150 Go. Cela représente environ 100 dossiers par jour et 50 Go par mois. L'index ElasticSearch pèse 2 Go.
 </p>
 
 <p>
-Le coût des services nécessaires pour la mise en ligne de cet index se monte à :
+Si vous êtes intéressé pour obtenir un copie de mon historique (dossiers / base d'index) vous pouvez scraper le site ou prendre contact avec moi sur GitHub.
+</p>
+
+<p>
+Les coûts des services nécessaires pour le stockage et la mise en ligne de cet index se montent à :
 <ul>
   <li>serveur online.net (serveur web + elasticsearch) : 15€/mois</li>
   <li>AWS Glacier : 50c/mois</li>
   <li>AWS EC2 : 1 x t2.large x 10mn/jour = 50c/mois</li>
+  <li>Nom de domaine : 12€/an</li>
 </ul>
 </p>
 
-Documentation et code source de <a href='https://github.com/michelbl/scraper-place'>scraper-place</a> et <a class="item" href="https://github.com/michelbl/better-place">Better Place</a> sur Github.
+
+<h2>Code source</h2>
+
+<p>
+La documentation et le code source de <a href='https://github.com/michelbl/scraper-place'>scraper-place</a> et <a class="item" href="https://github.com/michelbl/better-place">Better Place</a> sont tenus à jour sur Github.
+</p>
+
+<p>
+Merci de signaler les problèmes éventuellement rencontrés par un issue sur GitHub.
+</p>
+
+
+<h2>Conditions d'accès et de réutilisation</h2>
+
+<p>
+Vous pouvez accéder aux informations publiées par ce site de comme bon vous semble.
+</p>
+
+<p>
+Vous pouvez faire ce que vous voulez du code source de Better Place et de scraper-place. Toutefois, si vous réutilisez mon travail, je vous serais reconnaissant d'ajouter à la réutilisation un lien vers ce site.
+</p>
+
+<p>
+Les DCE sont soumis aux éventuelles conditions de réutilisation fixées par les administrations les ayant produits. De plus, les conditions de réutilisation sont encadrées par le code des relations entre le public et l'administration (livre III, titre II). En particulier "la réutilisation des informations publiques est soumise à la condition que ces dernières ne soient pas altérées, que leur sens ne soit pas dénaturé et que leurs sources et la date de leur dernière mise à jour soient mentionnées".
+</p>
+
+<p>
+Pareillement, les métadonnées en provenance de PLACE sont soumises aux conditions de réutilisation fixées par la direction des achats de l'Etat.
+</p>
