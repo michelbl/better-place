@@ -1,7 +1,7 @@
 const express = require('express');
 const config = require('../config');
 const esClient = require('../elasticsearch_client'); 
-const { getDocCount } = require('../utils');
+const { getDocCount, extractFrom } = require('../utils');
 
 const NB_LAST = 50;
 
@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', async function(req, res, next) {
   try {
-    const from = req.query.from || 0;
+    const from = extractFrom(req);
 
 
     const docCount = await getDocCount();
@@ -37,7 +37,8 @@ router.get('/', async function(req, res, next) {
     });
 
     const hits = esLastDceResponse.hits.hits;
-    const lastDceData = hits.map(hit => ({
+    const lastDceData = hits.map((hit, index) => ({
+      index: index + from + 1,
       href: `/dce/${hit._source.annonce_id}-${hit._source.org_acronym}`,
       annonce_id: hit._source.annonce_id,
       org_acronym: hit._source.org_acronym,

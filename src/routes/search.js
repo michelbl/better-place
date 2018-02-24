@@ -1,6 +1,8 @@
 const express = require('express');
 const esClient = require('../elasticsearch_client'); 
 const config = require('../config');
+const { extractFrom } = require('../utils');
+
 
 const router = express.Router();
 
@@ -13,7 +15,7 @@ router.get('/', async function(req, res, next) {
     let nbHits;
 
     const queryString = req.query.q;
-    const from = req.query.from || 0;
+    const from = extractFrom(req);
     const validQueryString = ((typeof queryString) === 'string') && (queryString.length !== 0);
     if (!validQueryString) {
       hitsData = [];
@@ -56,7 +58,8 @@ router.get('/', async function(req, res, next) {
       });
 
       const hits = esResponse.hits.hits;
-      hitsData = hits.map(hit => ({
+      hitsData = hits.map((hit, index) => ({
+        index: index + from + 1,
         href: `/dce/${hit._source.annonce_id}-${hit._source.org_acronym}`,
         annonce_id: hit._source.annonce_id,
         org_acronym: hit._source.org_acronym,
