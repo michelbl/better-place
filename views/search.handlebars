@@ -1,11 +1,14 @@
 <h1>Rechercher un DCE</h1>
 
 <form action="/search">
-  <input type="text" name="q"><br>
+  <input type="text" name="q" value="{{queryString}}"><br>
   <input type="submit" value="Rechercher">
 </form>
 
-{{#if pagination}}
+{{#if validQueryString}}
+  <p>{{nbHits}} DCE</p>
+
+
   <a href='{{pagination.firstPageHref}}'>1st</a>
 
   {{#if pagination.previousPageIndex}}
@@ -17,14 +20,15 @@
   {{#if pagination.nextPageIndex}}
     <a href='{{pagination.nextPageHref}}'>next {{pagination.nextPageIndex}}</a>
   {{/if}}
+
+
+  <ul>
+    {{#each hitsData}}
+      <li>
+        <a href='{{this.href}}'>{{this.fetch_datetime}} {{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
+        <p>{{this.highlight}}</p>
+      </li>
+    {{/each}}
+  </ul>
+
 {{/if}}
-
-
-<ul>
-  {{#each hitsData}}
-    <li>
-      <a href='{{this.href}}'>{{this.fetch_datetime}} {{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
-      <p>{{this.highlight}}</p>
-    </li>
-  {{/each}}
-</ul>
