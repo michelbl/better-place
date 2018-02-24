@@ -12,13 +12,16 @@ router.get('/', async function(req, res, next) {
     let hitsData;
 
     const queryString = req.query.q;
-    if ((typeof queryString) !== 'string' || queryString.length === 0) {
+    const from = req.query.from || 0;
+    const validQueryString = ((typeof queryString) === 'string') && (queryString.length !== 0);
+    if (!validQueryString) {
       hitsData = [];
     } else {
 
       const esResponse = await esClient.search({
         index: config.elasticsearch.index_name,
         type: config.elasticsearch.document_type,
+        from,
         size: MAX_NB_HITS,
         body: {
           _source: {
@@ -48,7 +51,27 @@ router.get('/', async function(req, res, next) {
         }));
     }
 
-    res.render('search', { hitsData });
+    const getPagination = function(queryString, from, pageSize, nbResults) {
+      const isLastPage = nbResults < MAX_NB_HITS;
+
+      const currentPageIndex = Math.round(from / MAX_NB_HITS);
+      const previousPageIndex = (currentPageIndex > 0) && (currentPageIndex - 1);
+      const nextPageIndex = !isLastPage && (currentPageIndex + 1);
+
+      const firstPageHref = `/search?q=${queryString}`;
+      const previousPageHref = `/search?q=${queryString}&from=${previousPageIndex * MAX_NB_HITS}`;
+      const nextPageHref = `/search?q=${queryString}&from=${nextPageIndex * MAX_NB_HITS}`;
+
+      return {
+        isLastPage,
+        currentPageIndex, previousPageIndex, nextPageIndex,
+        firstPageHref, previousPageHref, nextPageHref,
+      }
+    }
+
+    const pagination = validQueryString && getPagination(queryString, from, MAX_NB_HITS,  hitsData.length);
+
+    res.render('search', { pagination, hitsData });
 
   } catch (error) {
     return next(error);
