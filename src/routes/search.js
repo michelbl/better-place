@@ -43,6 +43,7 @@ router.get('/', async function(req, res, next) {
         annonce_id: hit._source.annonce_id,
         org_acronym: hit._source.org_acronym,
         intitule: hit._source.intitule,
+        fetch_datetime: hit._source.fetch_datetime,
         highlight: hit.highlight.content.join(' … '),
         }));
     }

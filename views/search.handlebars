@@ -9,7 +9,7 @@
 <ul>
   {{#each hitsData}}
     <li>
-      <a href='{{this.href}}'>{{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
+      <a href='{{this.href}}'>{{this.fetch_datetime}} {{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
       <p>{{this.highlight}}</p>
     </li>
   {{/each}}
