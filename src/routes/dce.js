@@ -29,7 +29,7 @@ router.get('/:annonce_id-:org_acronym', async function(req, res, next) {
   } = dceData;
 
   const buildHref = (annonce_id, org_acronym, documentType, originalName) =>
-    `/${publicPath}${annonce_id}-${org_acronym}-reglement${path.extname(originalName)}`;
+    `/${publicPath}${annonce_id}-${org_acronym}-${documentType}${path.extname(originalName)}`;
 
   const viewData = {
     place_metadata: {
