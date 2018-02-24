@@ -5,7 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const index = require('./routes/index');
-const all = require('./routes/all');
+const recent = require('./routes/recent');
 const dce = require('./routes/dce');
 const search = require('./routes/search');
 
@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/', index);
-app.use('/all', all);
+app.use('/recent', recent);
 app.use('/dce', dce);
 app.use('/search', search);
 

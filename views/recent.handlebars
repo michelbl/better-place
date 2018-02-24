@@ -7,16 +7,18 @@
 <h2>Derniers DCE</h2>
 
 <a href='{{pagination.firstPageHref}}'>1st</a>
-
+</br>
 {{#if pagination.previousPageIndex}}
   <a href='{{pagination.previousPageHref}}'>previous {{pagination.previousPageIndex}}</a>
+  </br>
 {{/if}}
-
 <p>current {{pagination.currentPageIndex}}</p>
-
+</br>
 {{#if pagination.nextPageIndex}}
   <a href='{{pagination.nextPageHref}}'>next {{pagination.nextPageIndex}}</a>
+  </br>
 {{/if}}
+<a href='{{pagination.lastPageHref}}'>last {{pagination.lastPageIndex}}</a>
 
 
 <ul>

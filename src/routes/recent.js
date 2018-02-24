@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('../config');
 const esClient = require('../elasticsearch_client'); 
+const { getDocCount } = require('../utils');
 
 const NB_LAST = 50;
 
@@ -12,10 +13,7 @@ router.get('/', async function(req, res, next) {
     const from = req.query.from || 0;
 
 
-    const esCountResponse = await esClient.count({
-      index: config.elasticsearch.index_name,
-    });
-    const docCount = esCountResponse.count;
+    const docCount = await getDocCount();
 
 
     const esLastDceResponse = await esClient.search({
@@ -53,22 +51,25 @@ router.get('/', async function(req, res, next) {
       const previousPageIndex = (currentPageIndex > 0) && (currentPageIndex - 1);
       const isLastPage = nbHits <= ((currentPageIndex + 1) * pageSize);
       const nextPageIndex = !isLastPage && (currentPageIndex + 1);
+      const lastPageIndex = Math.ceil(nbHits / pageSize) - 1;
+
     
-      const firstPageHref = `/all`;
-      const previousPageHref = `/all?from=${previousPageIndex * pageSize}`;
-      const nextPageHref = `/all?&from=${nextPageIndex * pageSize}`;
-    
+      const firstPageHref = `/recent`;
+      const previousPageHref = `/recent?from=${previousPageIndex * pageSize}`;
+      const nextPageHref = `/recent?&from=${nextPageIndex * pageSize}`;
+      const lastPageHref = `/recent?&from=${lastPageIndex * pageSize}`;
+
       return {
         isLastPage,
-        currentPageIndex, previousPageIndex, nextPageIndex,
-        firstPageHref, previousPageHref, nextPageHref,
+        currentPageIndex, previousPageIndex, nextPageIndex, lastPageIndex,
+        firstPageHref, previousPageHref, nextPageHref, lastPageHref,
       }
     }
 
     const pagination = getPagination(from, NB_LAST, docCount);
 
 
-    res.render('all', { pagination, docCount, lastDceData });
+    res.render('recent', { pagination, docCount, lastDceData });
   } catch(e) {
     return next(e);
   }
