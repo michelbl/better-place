@@ -7,9 +7,10 @@
 
 
 <ul>
-  {{#each hitsIds}}
+  {{#each hitsData}}
     <li>
-      {{this}}
+      <a href='{{this.href}}'>{{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
+      <p>{{this.highlight}}</p>
     </li>
   {{/each}}
 </ul>
