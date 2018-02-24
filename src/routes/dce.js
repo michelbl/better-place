@@ -1,7 +1,9 @@
 const path = require('path');
 const express = require('express');
-const database = require('../database');
+const config = require('../config');
+const esClient = require('../elasticsearch_client'); 
 const { publicPath } = require('../config');
+const { buildDceId } = require('../utils');
 
 const router = express.Router();
 
@@ -11,11 +13,19 @@ router.get('/:annonce_id-:org_acronym', async function(req, res, next) {
   let dceData;
 
   try {
-    dceData = await database.one('SELECT * FROM dce WHERE annonce_id = $1 AND org_acronym = $2', [annonceId, orgAcronym]);
+    const esResponse = await esClient.get({
+      index: config.elasticsearch.index_name,
+      type: config.elasticsearch.document_type,
+      id: buildDceId(annonceId, orgAcronym),
+      _sourceExclude: [ 'content' ],
+    });
+
+    dceData = esResponse._source;
+
   } catch(error) {
     const notFoundError = new Error("Not found");
     notFoundError.status = 404;
-    next(notFoundError);
+    return next(notFoundError);
   }
 
   const {

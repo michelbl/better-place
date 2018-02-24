@@ -50,7 +50,7 @@ router.get('/', async function(req, res, next) {
     res.render('search', { hitsData });
 
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
