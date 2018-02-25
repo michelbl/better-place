@@ -1,61 +1,46 @@
 <h1 class="ui header">Détails sur un DCE</h1>
 
-<ul>
-  <li>
-    Identifiant PLACE de l'annonce : {{ place_metadata.annonce_id }}
-  </li>
-  <li>
-    <a href='{{betterplace_metadata.original_url}}'>Lien original</a>
-  </li>
-  <li>
-    Identifiant "org_acronym" : {{ place_metadata.org_acronym }}
-  </li>
-  <li>
-    Métadonnée "reference" : {{ place_metadata.reference }}
-  </li>
-  <li>
-    Métadonnée "intitule" : {{ place_metadata.intitule }}
-  </li>
-  <li>
-    Métadonnée "objet" : {{ place_metadata.objet }}
-  </li>
-  <li>
-    Date du téléchargement depuis PLACE : {{ betterplace_metadata.fetch_datetime }}
-  </li>
-  <li>
-    Etat betterplace : {{ betterplace_metadata.state }}
-  </li>
-</ul>
+<div class="ui list">
+  <div class="item">Identifiant PLACE de l'annonce : {{ place_metadata.annonce_id }}</div>
+  <div class="item"><a href='{{betterplace_metadata.original_url}}'>Lien original</a></div>
+  <div class="item">Identifiant "org_acronym" : {{ place_metadata.org_acronym }}</div>
+  <div class="item">Métadonnée "reference" : {{ place_metadata.reference }}</div>
+  <div class="item">Métadonnée "intitule" : {{ place_metadata.intitule }}</div>
+  <div class="item">Métadonnée "objet" : {{ place_metadata.objet }}</div>
+  <div class="item">Date du téléchargement depuis PLACE : {{ betterplace_metadata.fetch_datetime }}</div>
+  <div class="item">Etat betterplace : {{ betterplace_metadata.state }}></div>
+</div>
 
-<h2>Avis</h2>
+
+<h2 class="ui header">Avis</h2>
 
 <p>Liens BOAMP :</p>
-<ul>
+<div class="ui list">
   {{#each place_metadata.links_boamp}}
-    <li>
+    <div class="item">
       <a href={{this}}>{{this}}</a>
-    </li>
+    </div>
   {{/each}}
-</ul>
+</div>
 
 {{#if avis}}
   {{#with avis}}
     <a href={{href}}>{{filename}} ({{file_size}})</a>
     <p>Glacier : {{glacier_id}}</p>
-    <ul>
+    <div class="ui list">
       {{#each embedded_filenames}}
-        <li>
+        <div class="item">
           {{this}}
-        </li>
+        </div>
       {{/each}}
-    </ul>
+    </div>
   {{/with}}
 {{else}}
   <p>Cette annonce de comprend pas d'avis.</p>
 {{/if}}
 
 
-<h2>Réglement</h2>
+<h2 class="ui header">Réglement</h2>
 
 <p>Référence du réglement : {{place_metadata.reglement_ref}}</p>
 
@@ -63,51 +48,51 @@
   {{#with reglement}}
     <a href={{href}}>{{filename}} ({{file_size}})</a>
     <p>Glacier : {{glacier_id}}</p>
-    <ul>
+    <div class="ui list">
       {{#each embedded_filenames}}
-        <li>
+        <div class="item">
           {{this}}
-        </li>
+        </div>
       {{/each}}
-    </ul>
+    </div>
   {{/with}}
 {{else}}
   <p>Cette annonce de comprend pas de réglement.</p>
 {{/if}}
 
 
-<h2>Dossier de Consultation des Entreprises</h2>
+<h2 class="ui header">Dossier de Consultation des Entreprises</h2>
 
 {{#if dce}}
   {{#with dce}}
     <a href={{href}}>{{filename}} ({{file_size}})</a>
     <p>Glacier : {{glacier_id}}</p>
-    <ul>
+    <div class="ui list">
       {{#each embedded_filenames}}
-        <li>
+        <div class="item">
           {{this}}
-        </li>
+        </div>
       {{/each}}
-    </ul>
+    </div>
   {{/with}}
 {{else}}
   <p>Cette annonce de comprend pas de dossier.</p>
 {{/if}}
 
 
-<h2>Complément</h2>
+<h2 class="ui header">Complément</h2>
 
 {{#if complement}}
   {{#with complement}}
     <a href={{href}}>{{filename}} ({{file_size}})</a>
     <p>Glacier : {{glacier_id}}</p>
-    <ul>
+    <div class="ui list">
       {{#each embedded_filenames}}
-        <li>
+        <div class="item">
           {{this}}
-        </li>
+        </div>
       {{/each}}
-    </ul>
+    </div>
   {{/with}}
 {{else}}
   <p>Cette annonce de comprend pas de complément.</p>

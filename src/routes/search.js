@@ -1,7 +1,7 @@
 const express = require('express');
 const esClient = require('../elasticsearch_client'); 
 const config = require('../config');
-const { extractFrom } = require('../utils');
+const { extractFrom, getDay } = require('../utils');
 
 
 const router = express.Router();
@@ -64,20 +64,20 @@ router.get('/', async function(req, res, next) {
         annonce_id: hit._source.annonce_id,
         org_acronym: hit._source.org_acronym,
         intitule: hit._source.intitule,
-        fetch_datetime: hit._source.fetch_datetime,
+        fetch_datetime: getDay(hit._source.fetch_datetime),
         highlight: hit.highlight.content.join(' … '),
         }));
     }
 
     const getPagination = function(queryString, from, pageSize, nbHits) {
-      const currentPageIndex = Math.round(from / pageSize);
-      const previousPageIndex = (currentPageIndex > 0) && (currentPageIndex - 1);
-      const isLastPage = nbHits <= ((currentPageIndex + 1) * pageSize);
+      const currentPageIndex = Math.floor(from / pageSize) + 1;
+      const previousPageIndex = currentPageIndex - 1;
+      const isLastPage = nbHits <= (currentPageIndex * pageSize);
       const nextPageIndex = !isLastPage && (currentPageIndex + 1);
     
       const firstPageHref = `/search?q=${queryString}`;
-      const previousPageHref = `/search?q=${queryString}&from=${previousPageIndex * pageSize}`;
-      const nextPageHref = `/search?q=${queryString}&from=${nextPageIndex * pageSize}`;
+      const previousPageHref = `/search?q=${queryString}&from=${(previousPageIndex - 1) * pageSize}`;
+      const nextPageHref = `/search?q=${queryString}&from=${(nextPageIndex - 1) * pageSize}`;
     
       return {
         isLastPage,
@@ -89,7 +89,13 @@ router.get('/', async function(req, res, next) {
     const pagination = validQueryString && getPagination(queryString, from, MAX_NB_HITS, nbHits);
 
 
-    res.render('search', { validQueryString, queryString, nbHits, pagination, hitsData });
+    res.render('search', {
+      validQueryString, queryString,
+      nbHits,
+      nbHitsPlural: nbHits > 1,
+      pagination,
+      hitsData
+    });
 
   } catch (error) {
     return next(error);

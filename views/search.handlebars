@@ -1,34 +1,117 @@
-<h1>Rechercher un DCE</h1>
-
-<form action="/search">
-  <input type="text" name="q" value="{{queryString}}"><br>
-  <input type="submit" value="Rechercher">
+<form class="ui form" action="/search">
+  <div class="field">
+    <div class="ui action input">
+      <input type="text" name="q" value="{{queryString}}">
+      <button class="ui button" type="submit">Rechercher</button>
+    </div>
+  </div>
 </form>
 
+
 {{#if validQueryString}}
-  <p>{{nbHits}} DCE</p>
+  {{#if nbHits}}
+    {{#if nbHitsPlural}}
+      <p>{{nbHits}} dossiers correspondent à votre recherche</p>
+    {{else}}
+      <p>{{nbHits}} dossier correspond à votre recherche</p>
+    {{/if}}
 
 
-  <a href='{{pagination.firstPageHref}}'>1st</a>
+    {{#if pagination.previousPageIndex}}
+      <a class="ui labeled icon button" href='{{pagination.firstPageHref}}'>
+        <i class="angle double left icon"></i>
+        1
+      </a>
+    {{else}}
+      <a class="ui labeled icon disabled button" href='{{pagination.firstPageHref}}'>
+        <i class="angle double left icon"></i>
+        1
+      </a>     
+    {{/if}}
 
-  {{#if pagination.previousPageIndex}}
-    <a href='{{pagination.previousPageHref}}'>previous {{pagination.previousPageIndex}}</a>
+    <div class="ui buttons">
+      {{#if pagination.previousPageIndex}}
+        <a class="ui labeled icon button" href='{{pagination.previousPageHref}}'>
+          <i class="left chevron icon"></i>
+          {{pagination.previousPageIndex}}
+        </a>
+      {{else}}
+        <div class="ui labeled icon disabled button">
+          <i class="left chevron icon"></i>
+        </div>      
+      {{/if}}
+
+      <div class="ui disabled button">
+         {{pagination.currentPageIndex}}
+      </div>
+
+      {{#if pagination.nextPageIndex}}
+        <a class="ui right labeled icon button" href='{{pagination.nextPageHref}}'>
+          {{pagination.nextPageIndex}}
+          <i class="right chevron icon"></i>
+        </a>
+      {{else}}
+        <div class="ui right labeled icon disabled button">
+          <i class="right chevron icon"></i>
+        </div>      
+      {{/if}}
+    </div>
+
+
+</br>
+
+
+    <div class="ui list">
+      {{#each hitsData}}
+        <div class="item">
+          {{this.index}} <a href='{{this.href}}'>{{this.fetch_datetime}} {{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
+          <p>{{this.highlight}}</p>
+        </div>
+      {{/each}}
+    </div>
+
+
+    {{#if pagination.previousPageIndex}}
+      <a class="ui labeled icon button" href='{{pagination.firstPageHref}}'>
+        <i class="angle double left icon"></i>
+        1
+      </a>
+    {{else}}
+      <a class="ui labeled icon disabled button" href='{{pagination.firstPageHref}}'>
+        <i class="angle double left icon"></i>
+        1
+      </a>     
+    {{/if}}
+
+    <div class="ui buttons">
+      {{#if pagination.previousPageIndex}}
+        <a class="ui labeled icon button" href='{{pagination.previousPageHref}}'>
+          <i class="left chevron icon"></i>
+          {{pagination.previousPageIndex}}
+        </a>
+      {{else}}
+        <div class="ui labeled icon disabled button">
+          <i class="left chevron icon"></i>
+        </div>      
+      {{/if}}
+
+      <div class="ui disabled button">
+         {{pagination.currentPageIndex}}
+      </div>
+
+      {{#if pagination.nextPageIndex}}
+        <a class="ui right labeled icon button" href='{{pagination.nextPageHref}}'>
+          {{pagination.nextPageIndex}}
+          <i class="right chevron icon"></i>
+        </a>
+      {{else}}
+        <div class="ui right labeled icon disabled button">
+          <i class="right chevron icon"></i>
+        </div>      
+      {{/if}}
+    </div>
+
+  {{else}}
+    <p>Aucun dossier ne correspond à votre recherche</p>
   {{/if}}
-
-  <p>current {{pagination.currentPageIndex}}</p>
-
-  {{#if pagination.nextPageIndex}}
-    <a href='{{pagination.nextPageHref}}'>next {{pagination.nextPageIndex}}</a>
-  {{/if}}
-
-
-  <ul>
-    {{#each hitsData}}
-      <li>
-        {{this.index}} <a href='{{this.href}}'>{{this.fetch_datetime}} {{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
-        <p>{{this.highlight}}</p>
-      </li>
-    {{/each}}
-  </ul>
-
 {{/if}}

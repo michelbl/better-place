@@ -10,6 +10,10 @@ function buildDceId(annonceId, orgAcronym) {
   return `${annonceId}-${orgAcronym}`;
 }
 
+function getDay(datetimeISOString) {
+  return datetimeISOString.split('T')[0];
+}
+
 async function getDocCount() {
   const esCountResponse = await esClient.count({
     index: config.elasticsearch.index_name,
@@ -20,5 +24,6 @@ async function getDocCount() {
 module.exports = {
   extractFrom,
   buildDceId,
+  getDay,
   getDocCount,
 }
