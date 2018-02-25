@@ -70,7 +70,7 @@ router.get('/', async function(req, res, next) {
     }
 
     const getPagination = function(queryString, from, pageSize, nbHits) {
-      const currentPageIndex = Math.floor(from / pageSize) + 1;
+      const currentPageIndex = Math.round(from / pageSize) + 1;
       const previousPageIndex = currentPageIndex - 1;
       const isLastPage = nbHits <= (currentPageIndex * pageSize);
       const nextPageIndex = !isLastPage && (currentPageIndex + 1);

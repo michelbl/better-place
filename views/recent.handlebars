@@ -1,30 +1,121 @@
-<h1 class="ui header">Derniers DCE</h1>
+<h1 class="ui header">Derniers dossiers</h1>
 
 <p>
-  {{ docCount }} DCE
+  {{ docCount }} dossiers de consultations des entreprises
 </p>
 
-<h2 class="ui header"></h2>
 
-<a href='{{pagination.firstPageHref}}'>1st</a>
-</br>
 {{#if pagination.previousPageIndex}}
-  <a href='{{pagination.previousPageHref}}'>previous {{pagination.previousPageIndex}}</a>
-  </br>
+  <a class="ui labeled icon button" href='{{pagination.firstPageHref}}'>
+    <i class="angle double left icon"></i>
+    1
+  </a>
+{{else}}
+  <a class="ui labeled icon disabled button" href='{{pagination.firstPageHref}}'>
+    <i class="angle double left icon"></i>
+    1
+  </a>     
 {{/if}}
-<p>current {{pagination.currentPageIndex}}</p>
-</br>
-{{#if pagination.nextPageIndex}}
-  <a href='{{pagination.nextPageHref}}'>next {{pagination.nextPageIndex}}</a>
-  </br>
+
+<div class="ui buttons">
+  {{#if pagination.previousPageIndex}}
+    <a class="ui labeled icon button" href='{{pagination.previousPageHref}}'>
+      <i class="left chevron icon"></i>
+      {{pagination.previousPageIndex}}
+    </a>
+  {{else}}
+    <div class="ui labeled icon disabled button">
+      <i class="left chevron icon"></i>
+    </div>      
+  {{/if}}
+
+  <div class="ui disabled button">
+      {{pagination.currentPageIndex}}
+  </div>
+
+  {{#if pagination.nextPageIndex}}
+    <a class="ui right labeled icon button" href='{{pagination.nextPageHref}}'>
+      {{pagination.nextPageIndex}}
+      <i class="right chevron icon"></i>
+    </a>
+  {{else}}
+    <div class="ui right labeled icon disabled button">
+      <i class="right chevron icon"></i>
+    </div>      
+  {{/if}}
+</div>
+
+{{#if pagination.isLastPage}}
+  <a class="ui labeled icon disabled button" href='{{pagination.lastPageHref}}'>
+    <i class="angle double right icon"></i>
+    {{pagination.lastPageIndex}}
+  </a>
+{{else}}
+  <a class="ui labeled icon button" href='{{pagination.lastPageHref}}'>
+    <i class="angle double right icon"></i>
+    {{pagination.lastPageIndex}}
+  </a>  
 {{/if}}
-<a href='{{pagination.lastPageHref}}'>last {{pagination.lastPageIndex}}</a>
 
 
 <div class="ui list">
   {{#each lastDceData}}
     <div class="item">
-      {{this.index}} <a href='{{this.href}}'>{{this.fetch_datetime}} {{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
+      <div class="ui label">{{this.fetch_datetime}}</div>
+      <a href='{{this.href}}'>{{this.intitule}}</a>
     </div>
   {{/each}}
 </div>
+
+
+{{#if pagination.previousPageIndex}}
+  <a class="ui labeled icon button" href='{{pagination.firstPageHref}}'>
+    <i class="angle double left icon"></i>
+    1
+  </a>
+{{else}}
+  <a class="ui labeled icon disabled button" href='{{pagination.firstPageHref}}'>
+    <i class="angle double left icon"></i>
+    1
+  </a>     
+{{/if}}
+
+<div class="ui buttons">
+  {{#if pagination.previousPageIndex}}
+    <a class="ui labeled icon button" href='{{pagination.previousPageHref}}'>
+      <i class="left chevron icon"></i>
+      {{pagination.previousPageIndex}}
+    </a>
+  {{else}}
+    <div class="ui labeled icon disabled button">
+      <i class="left chevron icon"></i>
+    </div>      
+  {{/if}}
+
+  <div class="ui disabled button">
+      {{pagination.currentPageIndex}}
+  </div>
+
+  {{#if pagination.nextPageIndex}}
+    <a class="ui right labeled icon button" href='{{pagination.nextPageHref}}'>
+      {{pagination.nextPageIndex}}
+      <i class="right chevron icon"></i>
+    </a>
+  {{else}}
+    <div class="ui right labeled icon disabled button">
+      <i class="right chevron icon"></i>
+    </div>      
+  {{/if}}
+</div>
+
+{{#if pagination.isLastPage}}
+  <a class="ui labeled icon disabled button" href='{{pagination.lastPageHref}}'>
+    <i class="angle double right icon"></i>
+    {{pagination.lastPageIndex}}
+  </a>
+{{else}}
+  <a class="ui labeled icon button" href='{{pagination.lastPageHref}}'>
+    <i class="angle double right icon"></i>
+    {{pagination.lastPageIndex}}
+  </a>  
+{{/if}}

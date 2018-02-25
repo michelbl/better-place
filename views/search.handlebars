@@ -58,14 +58,15 @@
     </div>
 
 
-</br>
-
-
     <div class="ui list">
       {{#each hitsData}}
         <div class="item">
-          {{this.index}} <a href='{{this.href}}'>{{this.fetch_datetime}} {{this.annonce_id}}-{{this.org_acronym}} {{this.intitule}}</a>
-          <p>{{this.highlight}}</p>
+          <div class="ui segment">
+            <div class="ui blue label">{{this.index}}</div>
+            <a href='{{this.href}}'>{{this.intitule}}</a>
+            <div class="ui label">{{this.fetch_datetime}}</div>
+            <div class="highlight">{{this.highlight}}</div>
+          </div>
         </div>
       {{/each}}
     </div>
