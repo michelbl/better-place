@@ -7,6 +7,8 @@ const { buildDceId } = require('../utils');
 
 const router = express.Router();
 
+const UNKNOWN_FILE_SIZE_MESSAGE = "Taille inconnue";
+
 router.get('/:annonce_id-:org_acronym', async function(req, res, next) {
   const annonceId = req.params.annonce_id;
   const orgAcronym = req.params.org_acronym;
@@ -52,28 +54,28 @@ router.get('/:annonce_id-:org_acronym', async function(req, res, next) {
     reglement: filename_reglement && {
       href: buildHref(annonce_id, org_acronym, 'reglement', filename_reglement),
       filename: filename_reglement,
-      file_size: file_size_reglement,
+      file_size: file_size_reglement || UNKNOWN_FILE_SIZE_MESSAGE,
       glacier_id: glacier_id_reglement,
       embedded_filenames: embedded_filenames_reglement,
     },
     complement: filename_complement && {
       href: buildHref(annonce_id, org_acronym, 'complement', filename_complement),
       filename: filename_complement,
-      file_size: file_size_complement,
+      file_size: file_size_complement || UNKNOWN_FILE_SIZE_MESSAGE,
       glacier_id: glacier_id_complement,
       embedded_filenames: embedded_filenames_complement,
     },
     avis: filename_avis && {
       href: buildHref(annonce_id, org_acronym, 'avis', filename_avis),
       filename: filename_avis,
-      file_size: file_size_avis,
+      file_size: file_size_avis || UNKNOWN_FILE_SIZE_MESSAGE,
       glacier_id: glacier_id_avis,
       embedded_filenames: embedded_filenames_avis,
     },
     dce: filename_dce && {
       href: buildHref(annonce_id, org_acronym, 'dce', filename_dce),
       filename: filename_dce,
-      file_size: file_size_dce,
+      file_size: file_size_dce || UNKNOWN_FILE_SIZE_MESSAGE,
       glacier_id: glacier_id_dce,
       embedded_filenames: embedded_filenames_dce,
     },
