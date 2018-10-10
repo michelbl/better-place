@@ -50,6 +50,7 @@ router.get('/', async function(req, res, next) {
             },
           },
           highlight : {
+            encoder: 'html',
             fields : {
               content : {},
             },
