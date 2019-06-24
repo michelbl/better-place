@@ -41,5 +41,11 @@ server {
         location /files {
                 alias /path/to/scraper-place/data/public;
         }
+
+        location /database-backups {
+            alias /path/to/scraper-place/data/backups;
+            autoindex on;
+        }
+
 }
 ```
