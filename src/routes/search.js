@@ -24,7 +24,6 @@ router.get('/', async function(req, res, next) {
 
       const esCountResponse = await esClient.count({
         index: config.elasticsearch.index_name,
-        type: config.elasticsearch.document_type,
         body: {
           query: {
             match: {
@@ -37,7 +36,6 @@ router.get('/', async function(req, res, next) {
 
       const esResponse = await esClient.search({
         index: config.elasticsearch.index_name,
-        type: config.elasticsearch.document_type,
         from,
         size: MAX_NB_HITS,
         body: {
