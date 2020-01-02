@@ -35,8 +35,8 @@ router.get('/:annonce_id', async function(req, res, next) {
     embedded_filenames_reglement, embedded_filenames_complement, embedded_filenames_avis, embedded_filenames_dce,
   } = dceData;
 
-  const buildHref = (annonce_id, org_acronym, documentType, originalName) =>
-    `/${publicPath}${annonce_id}-${org_acronym}-${documentType}${path.extname(originalName)}`;
+  const buildHref = (annonce_id, documentType, originalName) =>
+    `/${publicPath}${annonce_id}-${documentType}${path.extname(originalName)}`;
 
   const viewData = {
     place_metadata: {
