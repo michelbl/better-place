@@ -3,7 +3,7 @@ var config = {
     index_name: 'dce',
     document_type: 'dce',
     initOptions: {
-      host: 'localhost:9200',
+      node: 'http://localhost:9200',
       log: 'warning',
     },
   },
