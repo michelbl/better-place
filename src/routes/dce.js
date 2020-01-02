@@ -15,12 +15,11 @@ router.get('/:annonce_id', async function(req, res, next) {
   try {
     const esResponse = await esClient.get({
       index: config.elasticsearch.index_name,
-      type: config.elasticsearch.document_type,
       id: annonceId,
       _source_excludes: [ 'content' ],
     });
 
-    dceData = esResponse._source;
+    dceData = esResponse.body._source;
 
   } catch(error) {
     const notFoundError = new Error("Not found");
@@ -34,7 +33,6 @@ router.get('/:annonce_id', async function(req, res, next) {
     fetch_datetime,
     file_size_reglement, file_size_complement, file_size_avis, file_size_dce,
     embedded_filenames_reglement, embedded_filenames_complement, embedded_filenames_avis, embedded_filenames_dce,
-    state,
   } = dceData;
 
   const buildHref = (annonce_id, org_acronym, documentType, originalName) =>
@@ -46,7 +44,7 @@ router.get('/:annonce_id', async function(req, res, next) {
     },
     betterplace_metadata: {
       original_url: `https://www.marches-publics.gouv.fr/index.php?page=entreprise.EntrepriseDetailsConsultation&refConsultation=${annonce_id}&orgAcronyme=${org_acronym}`,
-      fetch_datetime, state,
+      fetch_datetime,
     },
     reglement: filename_reglement && {
       href: buildHref(annonce_id, org_acronym, 'reglement', filename_reglement),

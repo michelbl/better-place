@@ -17,26 +17,25 @@ router.get('/', async function(req, res, next) {
 
 
     const esLastDceResponse = await esClient.search({
-      index: config.elasticsearch.index_name,
-      type: config.elasticsearch.document_type,
-      size: NB_LAST,
-      from,
-      body: {
-        _source: {
-          excludes: [ 'content' ],
-        },
-        query: {
-          match_all: {},
-        },
-        sort: {
-          fetch_datetime: {
-            order: 'desc',
+        index: config.elasticsearch.index_name,
+        size: NB_LAST,
+        from,
+        body: {
+          _source: {
+            excludes: [ 'content' ],
+          },
+          query: {
+            match_all: {},
+          },
+          sort: {
+            fetch_datetime: {
+              order: 'desc',
+            },
           },
         },
-      },
-    });
+      });
 
-    const hits = esLastDceResponse.hits.hits;
+    const hits = esLastDceResponse.body.hits.hits;
     const lastDceData = hits.map((hit, index) => ({
       index: index + from + 1,
       href: `/dce/${hit._source.annonce_id}`,
