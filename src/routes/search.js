@@ -33,7 +33,7 @@ router.get('/', async function(req, res, next) {
           },
         },
       });
-      nbHits = esCountResponse.count;
+      nbHits = esCountResponse.body.count;
 
       const esResponse = await esClient.search({
         index: config.elasticsearch.index_name,
@@ -58,7 +58,7 @@ router.get('/', async function(req, res, next) {
         },
       });
 
-      const hits = esResponse.hits.hits;
+      const hits = esResponse.body.hits.hits;
       hitsData = hits.map((hit, index) => ({
         index: index + from + 1,
         href: `/dce/${hit._source.annonce_id}`,
