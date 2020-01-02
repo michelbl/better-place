@@ -20,11 +20,11 @@ Les nouveaux dossiers sont scrapés tous les matins puis publiés sur <a href='h
 </p>
 
 <p>
-Chaque dossier est dupliqué sur AWS Glacier par précaution.
+Chaque dossier est dupliqué sur AWS S3 Glacier Deep Archive par précaution.
 </p>
 
 <p>
-La liste des dossiers est contenue dans une base PostgreSQL. Cette base est sauvegardée de manière hebdomadaire sur AWS S3.
+La liste des dossiers est contenue dans une base mongodb. Cette base est sauvegardée de manière hebdomadaire sur AWS S3.
 </p>
 
 <p>
@@ -36,11 +36,11 @@ Le contenu extrait est indexé par ElasticSearch.
 </p>
 
 <p>
-Depuis sa mise en production (octobre 2017), <b>{{docCount}}</b> dossiers on été indexés pour un total de 420 Go (en octobre 2018). Cela représente environ 100 dossiers par jour ouvré et 35 Go par mois. L'index ElasticSearch pèse 6 Go.
+Depuis sa mise en production (octobre 2017), <b>{{docCount}}</b> dossiers on été indexés pour une moyenne de 15Mo par dossier. Cela représente environ 100 dossiers par jour ouvré et 35 Go par mois. L'index ElasticSearch grossit d'environ 200Mo par 1000 dossiers.
 </p>
 
 <p>
-Si vous êtes intéressé pour obtenir un copie de mon historique (dossiers / base d'index) vous pouvez scraper le site ou prendre contact avec moi sur GitHub.
+Si vous êtes intéressé pour obtenir un copie de mon historique (dossiers / base d'index) vous pouvez obtenir une copie des métadonnées (https://betterplace.info/database-backups/) puis direment télécharger depuis https://betterplace.info/files/xxx.
 </p>
 
 <p>
@@ -48,8 +48,8 @@ Les coûts des services nécessaires pour le stockage et la mise en ligne de cet
 </p>
 
 <div class="ui bulleted list">
-  <div class="item">serveur online.net (serveur web + elasticsearch) : 15€/mois</div>
-  <div class="item">AWS Glacier : 2€/mois</div>
+  <div class="item">serveur kimsufi 2To (stockage + serveur web + elasticsearch) : 10€/mois</div>
+  <div class="item">AWS S3 Glacier Deep Archive : 1€/mois</div>
   <div class="item">AWS EC2 : 1 x t2.large x 10mn/jour = 30c/mois</div>
   <div class="item">Nom de domaine : 12€/an</div>
 </div>

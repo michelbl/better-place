@@ -39,7 +39,7 @@ router.get('/', async function(req, res, next) {
     const hits = esLastDceResponse.hits.hits;
     const lastDceData = hits.map((hit, index) => ({
       index: index + from + 1,
-      href: `/dce/${hit._source.annonce_id}-${hit._source.org_acronym}`,
+      href: `/dce/${hit._source.annonce_id}`,
       annonce_id: hit._source.annonce_id,
       org_acronym: hit._source.org_acronym,
       intitule: hit._source.intitule,

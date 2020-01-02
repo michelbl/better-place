@@ -6,10 +6,6 @@ function extractFrom(req) {
   return parseInt(req.query.from) || 0;
 }
 
-function buildDceId(annonceId, orgAcronym) {
-  return `${annonceId}-${orgAcronym}`;
-}
-
 function getDay(datetimeISOString) {
   return datetimeISOString.split('T')[0];
 }
@@ -23,7 +19,6 @@ async function getDocCount() {
 
 module.exports = {
   extractFrom,
-  buildDceId,
   getDay,
   getDocCount,
 }
