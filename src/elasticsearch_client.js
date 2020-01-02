@@ -1,6 +1,6 @@
-const elasticsearch = require('elasticsearch');
+const { Client } = require('@elastic/elasticsearch');
 const config = require('./config');
 
-const client = new elasticsearch.Client(config.elasticsearch.initOptions);
+const client = new Client(config.elasticsearch.initOptions);
 
 module.exports = client;
