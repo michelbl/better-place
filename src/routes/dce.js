@@ -17,7 +17,7 @@ router.get('/:annonce_id', async function(req, res, next) {
       index: config.elasticsearch.index_name,
       type: config.elasticsearch.document_type,
       id: annonceId,
-      _sourceExclude: [ 'content' ],
+      _source_excludes: [ 'content' ],
     });
 
     dceData = esResponse._source;
