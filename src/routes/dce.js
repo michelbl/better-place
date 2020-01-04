@@ -14,7 +14,7 @@ router.get('/:annonce_id', async function(req, res, next) {
 
   if (annonceId.includes('-')) {
     const newAnnonceId = annonceId.split('-')[0]
-    return res.redirect(301, newAnnonceId);
+    return res.redirect(301, '/dce/' + newAnnonceId);
   }
 
   try {
