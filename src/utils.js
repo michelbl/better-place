@@ -14,7 +14,7 @@ async function getDocCount() {
   const esCountResponse = await esClient.count({
     index: config.elasticsearch.index_name,
   });
-  return esCountResponse.count;
+  return esCountResponse.body.count;
 }
 
 module.exports = {
