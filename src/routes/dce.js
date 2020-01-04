@@ -12,6 +12,11 @@ router.get('/:annonce_id', async function(req, res, next) {
   const annonceId = req.params.annonce_id;
   let dceData;
 
+  if (annonceId.includes('-')) {
+    const newAnnonceId = annonceId.split('-')[0]
+    return res.redirect(301, newAnnonceId);
+  }
+
   try {
     const esResponse = await esClient.get({
       index: config.elasticsearch.index_name,
