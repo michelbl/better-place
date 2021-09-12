@@ -40,18 +40,19 @@
     "transparence"
   ],
   "dependencies": {
+    "@elastic/elasticsearch": "^7.5.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "@elastic/elasticsearch": "^7.5.0",
     "eslint": "^4.16.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-node": "^5.2.1",
     "express": "~4.16.0",
     "express-handlebars": "^3.0.0",
-    "morgan": "~1.9.0",
+    "morgan": "^1.9.1",
     "pg-promise": "^7.0.3",
+    "rotating-file-stream": "^2.1.5",
     "serve-favicon": "~2.4.5"
   }
 }

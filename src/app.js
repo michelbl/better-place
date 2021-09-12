@@ -8,8 +8,16 @@ const index = require('./routes/index');
 const recent = require('./routes/recent');
 const dce = require('./routes/dce');
 const search = require('./routes/search');
+const fs = require('fs')
+const morgan = require('morgan')
+const rfs = require('rotating-file-stream') // version 2.x
 
 const app = express();
+
+var accessLogStream = rfs.createStream('access.log', {
+  interval: '7d',
+  path: path.join(__dirname, '../log')
+})
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views')); TODO???
@@ -23,6 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(morgan('combined', { stream: accessLogStream }))
 
 app.use('/', index);
 app.use('/recent', recent);
