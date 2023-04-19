@@ -27,6 +27,28 @@ Depuis sa mise en production (octobre 2017), <b>{{docCount}}</b> dossiers on ét
 Si vous êtes intéressé pour obtenir un copie de cette base de donnée (fichiers + métadonnées) vous pouvez obtenir une copie des métadonnées (https://betterplace.info/database-backups/) puis direment télécharger depuis https://betterplace.info/files/xxx.
 </p>
 
+<h2 class="ui header">Qualité de service</h2>
+
+<p>
+Ce service est maintenu bénévolement en "best effort". En raison de changements cassants dans l'interface de consultation de PLACE, la récupération des DCE est régulièrement arrêtée. Lorsque le service de récupération est mis à jour rapidement, il y a peu de pertes de données. Mais si la récupération reste cassée plus de 3 semaines, des DCE ne sont jamais archivés. Le service a rencontré plusieurs incidents à ce jour : 
+<ul>
+    <li>du 19 au 29 avril 2018 : arrêt du moissonnage. Cause : changement cassant de PLACE. Pas de perte de données.</li>
+    <li>du 11 au 14 octobre 2018 : arrêt du moissonnage. Cause : changement cassant de PLACE. Pas de perte de données.</li>
+    <li>du 13 juillet au 26 août 2019 : arrêt du moissonnage. Cause : changement cassant de PLACE. <b>Perte des DCE publiés du 13 juillet à début août 2019.</b></li>
+    <li>du 23 décembre 2019 au 9 janvier 2020 : moissonnages irréguliers plutôt que quotidiens. Cause : mise-à-jour de scraper-place. Pas de perte de données.</li>
+    <li>du 2 au 15 avril 2020 : arrêt du moissonnage. Cause : changement cassant de PLACE. Pas de perte de données.</li>
+    <li>du 14 mai au 14 juin 2020 : arrêt du moissonnage. Cause : changement cassant de PLACE. Perte probable de quelques DCE publiés les jours suivant le 14 mai.</li>
+    <li>du 28 mai au 8 juin 2021 : arrêt du moissonnage. Cause : disque plein. Pas de perte de données.</li>
+    <li>les 10 et 11 septembre 2021 : arrêt du moissonnage. Cause : disque plein. Pas de perte de données.</li>
+    <li>du 3 décembre 2021 au 6 janvier 2022 : arrêt du moissonnage. Cause : changement cassant de PLACE. Perte probable de quelques DCE publiés les jours suivant le 3 décembre 2021.</li>
+    <li>du 21 mars 2022 au 3 septembre 2022 : arrêt du moissonnage. Cause : disque plein. <b>Perte des DCE publiés du 21 mars à mi-août 2022.</b></li>
+    <li>du 3 septembre 2022 au 28 février 2023 : moissonnages irréguliers plutôt que quotidiens. Cause : changement de serveur. Pas de perte de données.</li>
+  </ul>
+</p>
+
+Une seule version est archivée : celle disponible lors du moissonnage. Si le DCE est mis à jour postérieurement au moissonnage, cette nouvele version n'est pas archivée.
+
+Une minorité de DCE (quelques pourcents tout au plus) ne franchit pas avec succès toutes les étapes techniques du moissonnage (par exemple, taille trop importante, format non géré, extraction de texte trop longue...).
 
 <h2 class="ui header">Code source</h2>
 
