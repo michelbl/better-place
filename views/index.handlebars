@@ -5,7 +5,7 @@ Better Place propose le téléchargement et la recherche sur des dossiers de mar
 </p>
 
 <p>
-Les Dossiers de Consultation des Entreprises (DCE) sont récupérés depuis <a href='https://www.marches-publics.gouv.fr/'>PLACE</a> avec <a href='https://github.com/michelbl/scraper-place'>scraper-place</a>. Seuls les dossiers postés sur PLACE après novembre 2017 sont disponible.
+Les Dossiers de Consultation des Entreprises (DCE) sont récupérés depuis <a href='https://www.marches-publics.gouv.fr/'>PLACE</a> avec <a href='https://github.com/michelbl/scraper-place'>scraper-place</a>. Seuls les dossiers postés sur PLACE après novembre 2017 sont disponibles.
 </p>
 
 <p>
@@ -16,43 +16,12 @@ J'ai développé cet outil afin d'améliorer la transparence de la commande publ
 <h2 class="ui header">Données</h2>
 
 <p>
-Les nouveaux dossiers sont scrapés tous les matins puis publiés sur <a href='https://betterplace.info/'>https://betterplace.info/</a>.
-</p>
-
-<p>
-Chaque dossier est dupliqué sur AWS S3 Glacier Deep Archive par précaution.
-</p>
-
-<p>
-La liste des dossiers est contenue dans une base mongodb. Cette base est sauvegardée de manière hebdomadaire sur AWS S3.
-</p>
-
-<p>
-L'extraction du contenu est effectuée avec Apache Tika. Pour pouvoir parser les gros dossiers (certains peuvent dépasser le giga-octet !) une instance AWS EC2 t2.large est utilisée pour cette étape.
-</p>
-
-<p>
-Le contenu extrait est indexé par ElasticSearch.
-</p>
-
-<p>
 Depuis sa mise en production (octobre 2017), <b>{{docCount}}</b> dossiers on été indexés pour une moyenne de 15Mo par dossier. Cela représente environ 100 dossiers par jour ouvré et 35 Go par mois. L'index ElasticSearch grossit d'environ 200Mo par 1000 dossiers.
 </p>
 
 <p>
-Si vous êtes intéressé pour obtenir un copie de cette base de donnée (fichiers + métadonnées) vous pouvez obtenir une copie des métadonnées (https://betterplace.info/database-backups/) puis direment télécharger depuis https://betterplace.info/files/xxx. Je supprime régulièrement les dossiers trop vieux pour ne pas dépasser les 2To de stockage du disque dur. Ces fichiers sont toujours indexés, mais renvoient une erreur 404 lors de l'accès. Ils sont encore archivés sur AWS Glacier Deep Archive. Je peux fournir une copie de ces documents sur demande.
+Si vous êtes intéressé pour obtenir un copie de cette base de donnée (fichiers + métadonnées) vous pouvez obtenir une copie des métadonnées (https://betterplace.info/database-backups/) puis direment télécharger depuis https://betterplace.info/files/xxx.
 </p>
-
-<p>
-Les coûts des services nécessaires pour le stockage et la mise en ligne de cet index se montent à :
-</p>
-
-<div class="ui bulleted list">
-  <div class="item">serveur kimsufi 2To (stockage + serveur web + elasticsearch) : 10€/mois</div>
-  <div class="item">AWS S3 Glacier Deep Archive : 3€/mois</div>
-  <div class="item">AWS EC2 : 1 x t2.large x 10mn/jour = 30c/mois</div>
-  <div class="item">Nom de domaine : 12€/an</div>
-</div>
 
 
 <h2 class="ui header">Code source</h2>
