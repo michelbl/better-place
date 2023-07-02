@@ -1,15 +1,23 @@
 <h1 class="ui header">Détails sur un DCE</h1>
 
 <div class="ui list">
-  <div class="item">Identifiant PLACE de l'annonce : {{ place_metadata.annonce_id }}</div>
-  <div class="item"><a href='{{betterplace_metadata.original_url}}'>Lien original</a></div>
-  <div class="item">Métadonnée "org_acronym" : {{ place_metadata.org_acronym }}</div>
-  <div class="item">Métadonnée "reference" : {{ place_metadata.reference }}</div>
-  <div class="item">Métadonnée "intitule" : {{ place_metadata.intitule }}</div>
-  <div class="item">Métadonnée "objet" : {{ place_metadata.objet }}</div>
-  <div class="item">Date du téléchargement depuis PLACE : {{ betterplace_metadata.fetch_datetime }}</div>
+  <div class="item">Identifiant PLACE de l'annonce :
+    {{place_metadata.annonce_id}}</div>
+  <div class="item"><a href="{{betterplace_metadata.original_url}}">Lien
+      original</a></div>
+  <div class="item">Métadonnée "org_acronym" :
+    {{place_metadata.org_acronym}}</div>
+  <div class="item">Métadonnée "reference" : {{place_metadata.reference}}</div>
+  <div class="item">Métadonnée "intitule" : {{place_metadata.intitule}}</div>
+  <div class="item">Métadonnée "objet" : {{place_metadata.objet}}</div>
+  <div class="item">Métadonnée "organisme" :
+    {{place_metadata.organisme
+      ??
+      "inconnu (récupéré avant le 2 juillet 2023)"
+    }}</div>
+  <div class="item">Date du téléchargement depuis PLACE :
+    {{betterplace_metadata.fetch_datetime}}</div>
 </div>
-
 
 <h2 class="ui header">Avis</h2>
 
@@ -37,7 +45,6 @@
   <p>Cette annonce de comprend pas d'avis.</p>
 {{/if}}
 
-
 <h2 class="ui header">Réglement</h2>
 
 <p>Référence du réglement : {{place_metadata.reglement_ref}}</p>
@@ -57,7 +64,6 @@
   <p>Cette annonce de comprend pas de réglement.</p>
 {{/if}}
 
-
 <h2 class="ui header">Dossier de Consultation des Entreprises</h2>
 
 {{#if dce}}
@@ -74,7 +80,6 @@
 {{else}}
   <p>Cette annonce de comprend pas de dossier.</p>
 {{/if}}
-
 
 <h2 class="ui header">Complément</h2>
 
