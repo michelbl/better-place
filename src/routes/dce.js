@@ -66,7 +66,10 @@ router.get("/:annonce_id", async function (req, res, next) {
       reference,
       intitule,
       objet,
-      organisme: organisme ?? "inconnu (récupéré avant le 2 juillet 2023)",
+      organisme:
+        organisme === undefined
+          ? "inconnu (récupéré avant le 2 juillet 2023)"
+          : organisme,
       reglement_ref,
     },
     betterplace_metadata: {
