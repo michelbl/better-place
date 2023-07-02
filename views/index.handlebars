@@ -1,80 +1,133 @@
 <h1 class="ui header">Better Place</h1>
 
 <p>
-Better Place propose le téléchargement et la recherche sur des dossiers de marchés publics.
+  Better Place propose le téléchargement et la recherche sur des dossiers de
+  marchés publics.
 </p>
 
 <p>
-Les Dossiers de Consultation des Entreprises (DCE) sont récupérés depuis <a href='https://www.marches-publics.gouv.fr/'>PLACE</a> avec <a href='https://github.com/michelbl/scraper-place'>scraper-place</a>. Seuls les dossiers postés sur PLACE après novembre 2017 sont disponibles.
+  Les Dossiers de Consultation des Entreprises (DCE) sont récupérés depuis
+  <a href="https://www.marches-publics.gouv.fr/">PLACE</a>
+  avec
+  <a href="https://github.com/michelbl/scraper-place">scraper-place</a>. Seuls
+  les dossiers postés sur PLACE après novembre 2017 sont disponibles.
 </p>
 
 <p>
-J'ai développé cet outil afin d'améliorer la transparence de la commande publique en France, mais il peut intéresser des entreprises et des administrations qui pourront trouver des exemples de DCE.
+  J'ai développé cet outil afin d'améliorer la transparence de la commande
+  publique en France, mais il peut intéresser des entreprises et des
+  administrations qui pourront trouver des exemples de DCE.
 </p>
 
 <p>
-ℹ️ Je peux ajouter d'autres plateformes de marchés publics ou améliorer l'interface de recherche si vous trouvez un financement.
+  ℹ️ Je peux ajouter d'autres plateformes de marchés publics ou améliorer
+  l'interface de recherche si vous trouvez un financement.
 </p>
-
 
 <h2 class="ui header">Données</h2>
 
 <p>
-Depuis sa mise en production (octobre 2017), <b>{{docCount}}</b> dossiers on été indexés pour une moyenne de 15Mo par dossier. Cela représente environ 100 dossiers par jour ouvré et 35 Go par mois. L'index ElasticSearch grossit d'environ 200Mo par 1000 dossiers.
+  Depuis sa mise en production (octobre 2017),
+  <b>{{docCount}}</b>
+  dossiers on été indexés pour une moyenne de 15Mo par dossier. Cela représente
+  environ 100 dossiers par jour ouvré et 35 Go par mois. L'index ElasticSearch
+  grossit d'environ 200Mo par 1000 dossiers.
 </p>
 
 <p>
-Si vous êtes intéressé pour obtenir un copie de cette base de donnée (fichiers + métadonnées) vous pouvez obtenir une copie des métadonnées (https://betterplace.info/database-backups/) puis direment télécharger depuis https://betterplace.info/files/xxx.
+  Si vous êtes intéressé pour obtenir un copie de cette base de donnée (fichiers
+  + métadonnées) vous pouvez obtenir une copie des métadonnées
+  (https://betterplace.info/database-backups/) puis direment télécharger depuis
+  https://betterplace.info/files/xxx.
 </p>
 
 <h2 class="ui header">Qualité de service</h2>
 
 <p>
-Ce service est maintenu bénévolement en "best effort". En raison de changements cassants dans l'interface de consultation de PLACE, la récupération des DCE est régulièrement arrêtée. Lorsque le service de récupération est mis à jour rapidement, il y a peu de pertes de données. Mais si la récupération reste cassée plus de 3 semaines, des DCE ne sont jamais archivés. Le service a rencontré plusieurs incidents à ce jour : 
-<ul>
-    <li>du 19 au 29 avril 2018 : arrêt du moissonnage. Cause : changement cassant de PLACE. Pas de perte de données.</li>
-    <li>du 11 au 14 octobre 2018 : arrêt du moissonnage. Cause : changement cassant de PLACE. Pas de perte de données.</li>
-    <li>du 13 juillet au 26 août 2019 : arrêt du moissonnage. Cause : changement cassant de PLACE. <b>Perte des DCE publiés du 13 juillet à début août 2019.</b></li>
-    <li>du 23 décembre 2019 au 9 janvier 2020 : moissonnages irréguliers plutôt que quotidiens. Cause : mise-à-jour de scraper-place. Pas de perte de données.</li>
-    <li>du 2 au 15 avril 2020 : arrêt du moissonnage. Cause : changement cassant de PLACE. Pas de perte de données.</li>
-    <li>du 14 mai au 14 juin 2020 : arrêt du moissonnage. Cause : changement cassant de PLACE. Perte probable de quelques DCE publiés les jours suivant le 14 mai.</li>
-    <li>du 28 mai au 8 juin 2021 : arrêt du moissonnage. Cause : disque plein. Pas de perte de données.</li>
-    <li>les 10 et 11 septembre 2021 : arrêt du moissonnage. Cause : disque plein. Pas de perte de données.</li>
-    <li>du 3 décembre 2021 au 6 janvier 2022 : arrêt du moissonnage. Cause : changement cassant de PLACE. Perte probable de quelques DCE publiés les jours suivant le 3 décembre 2021.</li>
-    <li>du 21 mars 2022 au 3 septembre 2022 : arrêt du moissonnage. Cause : disque plein. <b>Perte des DCE publiés du 21 mars à mi-août 2022.</b></li>
-    <li>du 3 septembre 2022 au 28 février 2023 : moissonnages irréguliers plutôt que quotidiens. Cause : changement de serveur. Pas de perte de données.</li>
+  Ce service est maintenu bénévolement en "best effort". En raison de
+  changements cassants dans l'interface de consultation de PLACE, la
+  récupération des DCE est régulièrement arrêtée. Lorsque le service de
+  récupération est mis à jour rapidement, il y a peu de pertes de données. Mais
+  si la récupération reste cassée plus de 3 semaines, des DCE ne sont jamais
+  archivés. Le service a rencontré plusieurs incidents à ce jour :
+  <ul>
+    <li>du 19 au 29 avril 2018 : arrêt du moissonnage. Cause : changement
+      cassant de PLACE. Pas de perte de données.</li>
+    <li>du 11 au 14 octobre 2018 : arrêt du moissonnage. Cause : changement
+      cassant de PLACE. Pas de perte de données.</li>
+    <li>du 13 juillet au 26 août 2019 : arrêt du moissonnage. Cause : changement
+      cassant de PLACE.
+      <b>Perte des DCE publiés du 13 juillet à début août 2019.</b></li>
+    <li>du 23 décembre 2019 au 9 janvier 2020 : moissonnages irréguliers plutôt
+      que quotidiens. Cause : mise-à-jour de scraper-place. Pas de perte de
+      données.</li>
+    <li>du 2 au 15 avril 2020 : arrêt du moissonnage. Cause : changement cassant
+      de PLACE. Pas de perte de données.</li>
+    <li>du 14 mai au 14 juin 2020 : arrêt du moissonnage. Cause : changement
+      cassant de PLACE. Perte probable de quelques DCE publiés les jours suivant
+      le 14 mai.</li>
+    <li>du 28 mai au 8 juin 2021 : arrêt du moissonnage. Cause : disque plein.
+      Pas de perte de données.</li>
+    <li>les 10 et 11 septembre 2021 : arrêt du moissonnage. Cause : disque
+      plein. Pas de perte de données.</li>
+    <li>du 3 décembre 2021 au 6 janvier 2022 : arrêt du moissonnage. Cause :
+      changement cassant de PLACE. Perte probable de quelques DCE publiés les
+      jours suivant le 3 décembre 2021.</li>
+    <li>du 21 mars 2022 au 3 septembre 2022 : arrêt du moissonnage. Cause :
+      disque plein.
+      <b>Perte des DCE publiés du 21 mars à mi-août 2022.</b></li>
+    <li>du 3 septembre 2022 au 28 février 2023 : moissonnages irréguliers plutôt
+      que quotidiens. Cause : changement de serveur. Pas de perte de données.</li>
+    <li>du 29 juin au 1er juillet 2023 : arrêt du moissonnage. Cause :
+      changement cassant de PLACE. Pas de perte de données.</li>
   </ul>
 </p>
 
-Une seule version est archivée : celle disponible lors du moissonnage. Si le DCE est mis à jour postérieurement au moissonnage, cette nouvele version n'est pas archivée.
-
-Une minorité de DCE (quelques pourcents tout au plus) ne franchit pas avec succès toutes les étapes techniques du moissonnage (par exemple, taille trop importante, format non géré, extraction de texte trop longue...).
+Une seule version est archivée : celle disponible lors du moissonnage. Si le DCE
+est mis à jour postérieurement au moissonnage, cette nouvele version n'est pas
+archivée. Une minorité de DCE (quelques pourcents tout au plus) ne franchit pas
+avec succès toutes les étapes techniques du moissonnage (par exemple, taille
+trop importante, format non géré, extraction de texte trop longue...).
 
 <h2 class="ui header">Code source</h2>
 
 <p>
-La documentation et le code source de <a href='https://github.com/michelbl/scraper-place'>scraper-place</a> et <a class="item" href="https://github.com/michelbl/better-place">Better Place</a> sont tenus à jour sur Github.
+  La documentation et le code source de
+  <a href="https://github.com/michelbl/scraper-place">scraper-place</a>
+  et
+  <a class="item" href="https://github.com/michelbl/better-place">Better Place</a>
+  sont tenus à jour sur Github.
 </p>
 
 <p>
-Merci de signaler les problèmes éventuellement rencontrés par un issue sur GitHub.
+  Merci de signaler les problèmes éventuellement rencontrés par un issue sur
+  GitHub.
 </p>
-
 
 <h2 class="ui header">Conditions d'accès et de réutilisation</h2>
 
 <p>
-Vous pouvez accéder aux informations publiées par ce site de comme bon vous semble.
+  Vous pouvez accéder aux informations publiées par ce site de comme bon vous
+  semble.
 </p>
 
 <p>
-Vous pouvez faire ce que vous voulez du code source de Better Place et de scraper-place. Toutefois, si vous réutilisez mon travail, je vous serais reconnaissant d'ajouter à la réutilisation un lien vers ce site.
+  Vous pouvez faire ce que vous voulez du code source de Better Place et de
+  scraper-place. Toutefois, si vous réutilisez mon travail, je vous serais
+  reconnaissant d'ajouter à la réutilisation un lien vers ce site.
 </p>
 
 <p>
-Les DCE sont soumis aux éventuelles conditions de réutilisation fixées par les administrations les ayant produits. De plus, les conditions de réutilisation sont encadrées par le code des relations entre le public et l'administration (livre III, titre II). En particulier "la réutilisation des informations publiques est soumise à la condition que ces dernières ne soient pas altérées, que leur sens ne soit pas dénaturé et que leurs sources et la date de leur dernière mise à jour soient mentionnées".
+  Les DCE sont soumis aux éventuelles conditions de réutilisation fixées par les
+  administrations les ayant produits. De plus, les conditions de réutilisation
+  sont encadrées par le code des relations entre le public et l'administration
+  (livre III, titre II). En particulier "la réutilisation des informations
+  publiques est soumise à la condition que ces dernières ne soient pas altérées,
+  que leur sens ne soit pas dénaturé et que leurs sources et la date de leur
+  dernière mise à jour soient mentionnées".
 </p>
 
 <p>
-Pareillement, les métadonnées en provenance de PLACE sont soumises aux conditions de réutilisation fixées par la direction des achats de l'Etat.
+  Pareillement, les métadonnées en provenance de PLACE sont soumises aux
+  conditions de réutilisation fixées par la direction des achats de l'Etat.
 </p>
