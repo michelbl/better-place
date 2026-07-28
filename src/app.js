@@ -1,5 +1,5 @@
 const express = require("express");
-const exphbs = require("express-handlebars");
+const { engine } = require("express-handlebars");
 const path = require("path");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
@@ -18,7 +18,7 @@ var accessLogStream = rfs.createStream("access.log", {
 });
 
 // view engine setup
-app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
+app.engine("handlebars", engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use(logger("dev"));
