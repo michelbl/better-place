@@ -3,14 +3,12 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
 const index = require("./routes/index");
 const recent = require("./routes/recent");
 const dce = require("./routes/dce");
 const search = require("./routes/search");
-const fs = require("fs");
 const morgan = require("morgan");
-const rfs = require("rotating-file-stream"); // version 2.x
+const rfs = require("rotating-file-stream");
 
 const app = express();
 
@@ -20,15 +18,12 @@ var accessLogStream = rfs.createStream("access.log", {
 });
 
 // view engine setup
-//app.set('views', path.join(__dirname, 'views')); TODO???
 app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger("dev"));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(morgan("combined", { stream: accessLogStream }));

@@ -24,7 +24,7 @@ router.get("/:annonce_id", async function (req, res, next) {
       _source_excludes: ["content"],
     });
 
-    dceData = esResponse.body._source;
+    dceData = esResponse._source;
   } catch (error) {
     const notFoundError = new Error("Not found");
     notFoundError.status = 404;

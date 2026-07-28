@@ -28,45 +28,41 @@ router.get('/', async function(req, res, next) {
 
       const esCountResponse = await esClient.count({
         index: config.elasticsearch.index_name,
-        body: {
-          query: {
-            bool: {
-              must: matchQueries
-            }
-          },
+        query: {
+          bool: {
+            must: matchQueries
+          }
         },
       });
-      nbHits = esCountResponse.body.count;
+      nbHits = esCountResponse.count;
 
       // generate a search object for elasticSearch on multiple fields
       const esResponse = await esClient.search({
         index: config.elasticsearch.index_name,
         from,
         size: MAX_NB_HITS,
-        body: {
-          _source: {
-            excludes: [ 'content' ],
+        _source: {
+          excludes: [ 'content' ],
+        },
+        query: {
+          bool: {
+            must: matchQueries
+          }
+        },
+        highlight : {
+          encoder: 'html',
+          fields : {
+            content : {},
+            intitule : {},
           },
-          query: {
-            bool: {
-              must: matchQueries
-            }
-          },
-          highlight : {
-            encoder: 'html',
-            fields : {
-              content : {},
-              intitule : {},
-            },
-            fragment_size: 100, // instead of 150
-            number_of_fragments: 3, // instead of 5
-            pre_tags: ['<b>'], // instead of em
-            post_tags: ['</b>'],
-          },
+          fragment_size: 100, // instead of 150
+          number_of_fragments: 3, // instead of 5
+          pre_tags: ['<b>'], // instead of em
+          post_tags: ['</b>'],
         },
       });
 
-      const hits = esResponse.body.hits.hits;
+      const hits = esResponse.hits.hits;
       hitsData = hits.map((hit, index) => ({
         index: index + from + 1,
         href: `/dce/${hit._source.annonce_id}`,
