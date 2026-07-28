@@ -41,7 +41,7 @@
     "transparence"
   ],
   "dependencies": {
-    "@elastic/elasticsearch": "^8.19.1",
+    "@elastic/elasticsearch": "^9.4.2",
     "cookie-parser": "^1.4.7",
     "debug": "^4.4.3",
     "express": "^5.2.1",
