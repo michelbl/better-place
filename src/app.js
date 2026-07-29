@@ -18,7 +18,17 @@ var accessLogStream = rfs.createStream("access.log", {
 });
 
 // view engine setup
-app.engine("handlebars", engine({ defaultLayout: "main" }));
+app.engine(
+  "handlebars",
+  engine({
+    defaultLayout: "main",
+    helpers: {
+      eq: (a, b) => a === b,
+      selected: (a, b) => (a === b ? "selected" : ""),
+      checked: (value) => (value ? "checked" : ""),
+    },
+  }),
+);
 app.set("view engine", "handlebars");
 
 app.use(logger("dev"));

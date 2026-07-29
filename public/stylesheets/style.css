@@ -11,4 +11,16 @@ body {
   margin: 5em 0em 0em;
   padding: 5em 0em;
 }
-.highlight {}
+.highlight {
+  margin-top: 0.5em;
+  color: #555;
+}
+#searchfilters {
+  margin-top: 1em;
+}
+#searchfilters .ui.dividing.header {
+  margin-top: 1.5em;
+}
+#searchfilters .inline.fields > label {
+  margin-right: 1.5em;
+}

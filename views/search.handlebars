@@ -1,54 +1,213 @@
-<form class="ui form" action="/search">
+<form class="ui form" action="/search" method="get">
   <div class="fields">
     <div class="ten wide field">
       <input
         type="text"
         name="q"
-        value="{{queryString}}"
+        value="{{q}}"
         placeholder="Contenu"
       />
     </div>
     <div class="three wide field">
-      <div class="ui input">
-        <button class="ui submit button" type="submit">Rechercher</button>
-      </div>
+      <button class="ui submit button" type="submit">Rechercher</button>
     </div>
     <div class="three wide field">
-      <div class="ui input">
-        <div
-          class="ui button"
-          type="submit"
-          onclick="searchfilters.style.display = 'flex'"
-        >Filtres</div>
-      </div>
+      <button
+        class="ui button"
+        type="button"
+        onclick="document.getElementById('searchfilters').style.display = 'block'"
+      >Filtres</button>
     </div>
   </div>
-  <div class="fields" id="searchfilters" style="display: none;">
-    <div class="four wide field">
-      <input
-        type="text"
-        name="intitule"
-        value="{{intitule}}"
-        placeholder="Intitulé"
-      />
-    </div>
-    <div class="four wide field">
-      <input
-        type="text"
-        name="reference"
-        value="{{reference}}"
-        placeholder="Référence"
-      />
-    </div>
-    <div class="four wide field">
-      <input
-        type="text"
-        name="organisme"
-        value="{{organisme}}"
-        placeholder="Organisme"
-      />
+
+  <div id="searchfilters" style="display: {{#if filtersOpen}}block{{else}}none{{/if}};">
+    <h4 class="ui dividing header">Recherche textuelle</h4>
+    <div class="fields">
+      <div class="four wide field">
+        <label>Champ ciblé</label>
+        <select name="q_field" class="ui dropdown">
+          <option value="content" {{selected q_field "content"}}>Contenu</option>
+          <option value="intitule" {{selected q_field "intitule"}}>Intitulé</option>
+          <option value="objet" {{selected q_field "objet"}}>Objet</option>
+          <option value="all" {{selected q_field "all"}}>Contenu + intitulé + objet</option>
+        </select>
+      </div>
+      <div class="six wide field">
+        <label>Exclure</label>
+        <input
+          type="text"
+          name="exclude"
+          value="{{exclude}}"
+          placeholder="Termes à exclure"
+        />
+      </div>
+      <div class="six wide field">
+        <label>&nbsp;</label>
+        <label>
+          <input type="checkbox" name="phrase" value="1" {{checked phrase}} />
+          Phrase exacte
+        </label>
+      </div>
     </div>
 
+    <h4 class="ui dividing header">Métadonnées</h4>
+    <div class="fields">
+      <div class="four wide field">
+        <label>Intitulé</label>
+        <input type="text" name="intitule" value="{{intitule}}" />
+      </div>
+      <div class="four wide field">
+        <label>Objet</label>
+        <input type="text" name="objet" value="{{objet}}" />
+      </div>
+      <div class="four wide field">
+        <label>Référence</label>
+        <input type="text" name="reference" value="{{reference}}" />
+      </div>
+      <div class="four wide field">
+        <label>Référence du règlement</label>
+        <input type="text" name="reglement_ref" value="{{reglement_ref}}" />
+      </div>
+    </div>
+    <div class="fields">
+      <div class="four wide field">
+        <label>Organisme</label>
+        <input type="text" name="organisme" value="{{organisme}}" />
+      </div>
+      <div class="four wide field">
+        <label>Entité d'achat</label>
+        <input type="text" name="entite_achat" value="{{entite_achat}}" />
+      </div>
+      <div class="four wide field">
+        <label>Acronyme organisme</label>
+        <input type="text" name="org_acronym" value="{{org_acronym}}" placeholder="ex. x7c" />
+      </div>
+      <div class="four wide field">
+        <label>Identifiant d'annonce</label>
+        <input type="text" name="annonce_id" value="{{annonce_id}}" />
+      </div>
+    </div>
+    <div class="fields">
+      <div class="four wide field">
+        <label>Lieu d'exécution</label>
+        <input type="text" name="lieu_execution" value="{{lieu_execution}}" placeholder="ex. Paris, 75" />
+      </div>
+      <div class="four wide field">
+        <label>Code CPV</label>
+        <input type="text" name="code_cpv" value="{{code_cpv}}" />
+      </div>
+      <div class="four wide field">
+        <label>Catégorie principale</label>
+        <select name="categorie_principale" class="ui dropdown">
+          <option value="" {{selected categorie_principale ""}}>—</option>
+          <option value="Travaux" {{selected categorie_principale "Travaux"}}>Travaux</option>
+          <option value="Fournitures" {{selected categorie_principale "Fournitures"}}>Fournitures</option>
+          <option value="Services" {{selected categorie_principale "Services"}}>Services</option>
+        </select>
+      </div>
+      <div class="four wide field">
+        <label>Procédure</label>
+        <input type="text" name="procedure" value="{{procedure}}" placeholder="ex. adaptée" />
+      </div>
+    </div>
+    <div class="fields">
+      <div class="four wide field">
+        <label>Allotissement</label>
+        <select name="allotissement" class="ui dropdown">
+          <option value="" {{selected allotissement ""}}>—</option>
+          <option value="oui" {{selected allotissement "oui"}}>Alloti</option>
+          <option value="non" {{selected allotissement "non"}}>Non alloti</option>
+        </select>
+      </div>
+    </div>
+
+    <h4 class="ui dividing header">Dates</h4>
+    <div class="fields">
+      <div class="four wide field">
+        <label>Date limite (début)</label>
+        <input type="date" name="date_limite_min" value="{{date_limite_min}}" />
+      </div>
+      <div class="four wide field">
+        <label>Date limite (fin)</label>
+        <input type="date" name="date_limite_max" value="{{date_limite_max}}" />
+      </div>
+      <div class="four wide field">
+        <label>&nbsp;</label>
+        <label>
+          <input type="checkbox" name="ouverte" value="1" {{checked ouverte}} />
+          Encore ouverte
+        </label>
+      </div>
+    </div>
+    <div class="fields">
+      <div class="four wide field">
+        <label>Téléchargement (début)</label>
+        <input type="date" name="fetch_min" value="{{fetch_min}}" />
+      </div>
+      <div class="four wide field">
+        <label>Téléchargement (fin)</label>
+        <input type="date" name="fetch_max" value="{{fetch_max}}" />
+      </div>
+      <div class="four wide field">
+        <label>Derniers N jours</label>
+        <input type="number" name="fetch_days" value="{{fetch_days}}" min="1" step="1" placeholder="ex. 7" />
+      </div>
+    </div>
+
+    <h4 class="ui dividing header">Documents</h4>
+    <div class="inline fields">
+      <label>
+        <input type="checkbox" name="has_dce" value="1" {{checked has_dce}} />
+        Avec DCE
+      </label>
+      <label>
+        <input type="checkbox" name="has_avis" value="1" {{checked has_avis}} />
+        Avec avis
+      </label>
+      <label>
+        <input type="checkbox" name="has_reglement" value="1" {{checked has_reglement}} />
+        Avec règlement
+      </label>
+      <label>
+        <input type="checkbox" name="has_complement" value="1" {{checked has_complement}} />
+        Avec complément
+      </label>
+    </div>
+    <div class="fields">
+      <div class="eight wide field">
+        <label>Nom de fichier embarqué</label>
+        <input
+          type="text"
+          name="embedded_filename"
+          value="{{embedded_filename}}"
+          placeholder="ex. CCTP, RC, AE"
+        />
+      </div>
+      <div class="four wide field">
+        <label>Taille DCE min (Mo)</label>
+        <input type="number" name="size_min" value="{{size_min}}" min="0" step="0.1" />
+      </div>
+      <div class="four wide field">
+        <label>Taille DCE max (Mo)</label>
+        <input type="number" name="size_max" value="{{size_max}}" min="0" step="0.1" />
+      </div>
+    </div>
+
+    <h4 class="ui dividing header">Tri</h4>
+    <div class="fields">
+      <div class="eight wide field">
+        <select name="sort" class="ui dropdown">
+          <option value="relevance" {{selected sort "relevance"}}>Pertinence</option>
+          <option value="fetch_desc" {{selected sort "fetch_desc"}}>Téléchargement (récent → ancien)</option>
+          <option value="fetch_asc" {{selected sort "fetch_asc"}}>Téléchargement (ancien → récent)</option>
+          <option value="deadline_asc" {{selected sort "deadline_asc"}}>Date limite (proche → lointaine)</option>
+          <option value="deadline_desc" {{selected sort "deadline_desc"}}>Date limite (lointaine → proche)</option>
+        </select>
+      </div>
+      <div class="eight wide field">
+        <button class="ui primary submit button" type="submit">Appliquer les filtres</button>
+      </div>
+    </div>
   </div>
 </form>
 
@@ -116,6 +275,9 @@
             <div class="ui blue label">{{this.index}}</div>
             <a href="{{this.href}}">{{{this.intitule}}}</a>
             <div class="ui label">{{this.fetch_datetime}}</div>
+            {{#if this.date_limite_remise_plis}}
+              <div class="ui orange label">Limite {{this.date_limite_remise_plis}}</div>
+            {{/if}}
             <div class="highlight">{{{this.highlight}}}</div>
           </div>
         </div>
