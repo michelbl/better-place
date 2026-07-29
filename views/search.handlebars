@@ -60,22 +60,22 @@
       <p>{{nbHits}} dossier correspond à votre recherche</p>
     {{/if}}
 
-    {{#if pagination.previousPageIndex}}
-      <a class="ui labeled icon button" href="{{pagination.firstPageHref}}">
-        <i class="angle double left icon"></i>
-        1
-      </a>
-    {{else}}
-      <a
-        class="ui labeled icon disabled button"
-        href="{{pagination.firstPageHref}}"
-      >
-        <i class="angle double left icon"></i>
-        1
-      </a>
-    {{/if}}
-
     <div class="ui buttons">
+      {{#if pagination.previousPageIndex}}
+        <a class="ui labeled icon button" href="{{pagination.firstPageHref}}">
+          <i class="angle double left icon"></i>
+          1
+        </a>
+      {{else}}
+        <a
+          class="ui labeled icon disabled button"
+          href="{{pagination.firstPageHref}}"
+        >
+          <i class="angle double left icon"></i>
+          1
+        </a>
+      {{/if}}
+
       {{#if pagination.previousPageIndex}}
         <a
           class="ui labeled icon button"
@@ -122,22 +122,22 @@
       {{/each}}
     </div>
 
-    {{#if pagination.previousPageIndex}}
-      <a class="ui labeled icon button" href="{{pagination.firstPageHref}}">
-        <i class="angle double left icon"></i>
-        1
-      </a>
-    {{else}}
-      <a
-        class="ui labeled icon disabled button"
-        href="{{pagination.firstPageHref}}"
-      >
-        <i class="angle double left icon"></i>
-        1
-      </a>
-    {{/if}}
-
     <div class="ui buttons">
+      {{#if pagination.previousPageIndex}}
+        <a class="ui labeled icon button" href="{{pagination.firstPageHref}}">
+          <i class="angle double left icon"></i>
+          1
+        </a>
+      {{else}}
+        <a
+          class="ui labeled icon disabled button"
+          href="{{pagination.firstPageHref}}"
+        >
+          <i class="angle double left icon"></i>
+          1
+        </a>
+      {{/if}}
+
       {{#if pagination.previousPageIndex}}
         <a
           class="ui labeled icon button"

@@ -5,19 +5,19 @@
 </p>
 
 
-{{#if pagination.previousPageIndex}}
-  <a class="ui labeled icon button" href='{{pagination.firstPageHref}}'>
-    <i class="angle double left icon"></i>
-    1
-  </a>
-{{else}}
-  <a class="ui labeled icon disabled button" href='{{pagination.firstPageHref}}'>
-    <i class="angle double left icon"></i>
-    1
-  </a>     
-{{/if}}
-
 <div class="ui buttons">
+  {{#if pagination.previousPageIndex}}
+    <a class="ui labeled icon button" href='{{pagination.firstPageHref}}'>
+      <i class="angle double left icon"></i>
+      1
+    </a>
+  {{else}}
+    <a class="ui labeled icon disabled button" href='{{pagination.firstPageHref}}'>
+      <i class="angle double left icon"></i>
+      1
+    </a>
+  {{/if}}
+
   {{#if pagination.previousPageIndex}}
     <a class="ui labeled icon button" href='{{pagination.previousPageHref}}'>
       <i class="left chevron icon"></i>
@@ -26,7 +26,7 @@
   {{else}}
     <div class="ui labeled icon disabled button">
       <i class="left chevron icon"></i>
-    </div>      
+    </div>
   {{/if}}
 
   <div class="ui disabled button">
@@ -41,21 +41,21 @@
   {{else}}
     <div class="ui right labeled icon disabled button">
       <i class="right chevron icon"></i>
-    </div>      
+    </div>
+  {{/if}}
+
+  {{#if pagination.isLastPage}}
+    <a class="ui right labeled icon disabled button" href='{{pagination.lastPageHref}}'>
+      {{pagination.lastPageIndex}}
+      <i class="angle double right icon"></i>
+    </a>
+  {{else}}
+    <a class="ui right labeled icon button" href='{{pagination.lastPageHref}}'>
+      {{pagination.lastPageIndex}}
+      <i class="angle double right icon"></i>
+    </a>
   {{/if}}
 </div>
-
-{{#if pagination.isLastPage}}
-  <a class="ui labeled icon disabled button" href='{{pagination.lastPageHref}}'>
-    <i class="angle double right icon"></i>
-    {{pagination.lastPageIndex}}
-  </a>
-{{else}}
-  <a class="ui labeled icon button" href='{{pagination.lastPageHref}}'>
-    <i class="angle double right icon"></i>
-    {{pagination.lastPageIndex}}
-  </a>  
-{{/if}}
 
 
 <div class="ui list">
@@ -68,19 +68,19 @@
 </div>
 
 
-{{#if pagination.previousPageIndex}}
-  <a class="ui labeled icon button" href='{{pagination.firstPageHref}}'>
-    <i class="angle double left icon"></i>
-    1
-  </a>
-{{else}}
-  <a class="ui labeled icon disabled button" href='{{pagination.firstPageHref}}'>
-    <i class="angle double left icon"></i>
-    1
-  </a>     
-{{/if}}
-
 <div class="ui buttons">
+  {{#if pagination.previousPageIndex}}
+    <a class="ui labeled icon button" href='{{pagination.firstPageHref}}'>
+      <i class="angle double left icon"></i>
+      1
+    </a>
+  {{else}}
+    <a class="ui labeled icon disabled button" href='{{pagination.firstPageHref}}'>
+      <i class="angle double left icon"></i>
+      1
+    </a>
+  {{/if}}
+
   {{#if pagination.previousPageIndex}}
     <a class="ui labeled icon button" href='{{pagination.previousPageHref}}'>
       <i class="left chevron icon"></i>
@@ -89,7 +89,7 @@
   {{else}}
     <div class="ui labeled icon disabled button">
       <i class="left chevron icon"></i>
-    </div>      
+    </div>
   {{/if}}
 
   <div class="ui disabled button">
@@ -104,18 +104,18 @@
   {{else}}
     <div class="ui right labeled icon disabled button">
       <i class="right chevron icon"></i>
-    </div>      
+    </div>
+  {{/if}}
+
+  {{#if pagination.isLastPage}}
+    <a class="ui right labeled icon disabled button" href='{{pagination.lastPageHref}}'>
+      {{pagination.lastPageIndex}}
+      <i class="angle double right icon"></i>
+    </a>
+  {{else}}
+    <a class="ui right labeled icon button" href='{{pagination.lastPageHref}}'>
+      {{pagination.lastPageIndex}}
+      <i class="angle double right icon"></i>
+    </a>
   {{/if}}
 </div>
-
-{{#if pagination.isLastPage}}
-  <a class="ui labeled icon disabled button" href='{{pagination.lastPageHref}}'>
-    <i class="angle double right icon"></i>
-    {{pagination.lastPageIndex}}
-  </a>
-{{else}}
-  <a class="ui labeled icon button" href='{{pagination.lastPageHref}}'>
-    <i class="angle double right icon"></i>
-    {{pagination.lastPageIndex}}
-  </a>  
-{{/if}}
