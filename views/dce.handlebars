@@ -11,6 +11,29 @@
   <div class="item">Métadonnée "intitule" : {{place_metadata.intitule}}</div>
   <div class="item">Métadonnée "objet" : {{place_metadata.objet}}</div>
   <div class="item">Métadonnée "organisme" : {{place_metadata.organisme}}</div>
+  {{#if place_metadata.date_limite_remise_plis}}
+    <div class="item">Date limite de remise des plis :
+      {{place_metadata.date_limite_remise_plis}}</div>
+  {{/if}}
+  {{#if place_metadata.entite_achat}}
+    <div class="item">Entité d'achat : {{place_metadata.entite_achat}}</div>
+  {{/if}}
+  {{#if place_metadata.procedure}}
+    <div class="item">Procédure : {{place_metadata.procedure}}</div>
+  {{/if}}
+  {{#if place_metadata.categorie_principale}}
+    <div class="item">Catégorie principale :
+      {{place_metadata.categorie_principale}}</div>
+  {{/if}}
+  {{#if place_metadata.allotissement}}
+    <div class="item">Allotissement : {{place_metadata.allotissement}}</div>
+  {{/if}}
+  {{#if place_metadata.lieu_execution}}
+    <div class="item">Lieu d'exécution : {{place_metadata.lieu_execution}}</div>
+  {{/if}}
+  {{#if place_metadata.code_cpv}}
+    <div class="item">Code CPV : {{place_metadata.code_cpv}}</div>
+  {{/if}}
   <div class="item">Date du téléchargement depuis PLACE :
     {{betterplace_metadata.fetch_datetime}}</div>
 </div>

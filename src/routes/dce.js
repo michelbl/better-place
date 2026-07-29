@@ -39,6 +39,13 @@ router.get("/:annonce_id", async function (req, res, next) {
     intitule,
     objet,
     organisme,
+    date_limite_remise_plis,
+    entite_achat,
+    procedure,
+    categorie_principale,
+    allotissement,
+    lieu_execution,
+    code_cpv,
     reglement_ref,
     filename_reglement,
     filename_complement,
@@ -70,6 +77,13 @@ router.get("/:annonce_id", async function (req, res, next) {
         organisme === undefined
           ? "inconnu (récupéré avant le 2 juillet 2023)"
           : organisme,
+      date_limite_remise_plis,
+      entite_achat,
+      procedure,
+      categorie_principale,
+      allotissement,
+      lieu_execution,
+      code_cpv,
       reglement_ref,
     },
     betterplace_metadata: {
