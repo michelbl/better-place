@@ -8,6 +8,7 @@ const {
   buildSort,
   extractSearchForm,
   buildSearchPath,
+  getSearchTooltips,
 } = require('../utils');
 
 
@@ -25,6 +26,7 @@ router.get('/', async function(req, res, next) {
     const { hasCriteria, query } = buildSearchQuery(req.query);
     const sort = buildSort(req.query);
     const from = extractFrom(req);
+    const tooltips = await getSearchTooltips();
 
     if (!hasCriteria) {
       hitsData = [];
@@ -113,6 +115,7 @@ router.get('/', async function(req, res, next) {
       ...form,
       queryString: form.q,
       validQueryString: hasCriteria,
+      tooltips,
       nbHits,
       nbHitsPlural: nbHits > 1,
       pagination,

@@ -330,6 +330,116 @@ async function getDocCount() {
   return esCountResponse.count;
 }
 
+const TOOLTIP_CACHE_TTL_MS = 60 * 60 * 1000;
+let tooltipCache = null;
+let tooltipCacheAt = 0;
+
+function formatExamples(values, limit = 4) {
+  const unique = [...new Set(values.filter(Boolean))];
+  return unique.slice(0, limit).join(', ');
+}
+
+function tip(explanation, examples) {
+  if (!examples) {
+    return explanation;
+  }
+  return `${explanation} Exemples : ${examples}.`;
+}
+
+async function fetchFrequentTerms(field, size = 8) {
+  try {
+    const response = await esClient.search({
+      index: config.elasticsearch.index_name,
+      size: 0,
+      aggs: {
+        values: {
+          terms: {
+            field,
+            size,
+          },
+        },
+      },
+    });
+    return response.aggregations.values.buckets.map((bucket) => bucket.key);
+  } catch (_error) {
+    return [];
+  }
+}
+
+async function getSearchTooltips() {
+  if (tooltipCache && Date.now() - tooltipCacheAt < TOOLTIP_CACHE_TTL_MS) {
+    return tooltipCache;
+  }
+
+  const [organismes, orgAcronyms, embeddedFilenames] = await Promise.all([
+    fetchFrequentTerms('organisme.keyword', 6),
+    fetchFrequentTerms('org_acronym.keyword', 6),
+    fetchFrequentTerms('embedded_filenames_dce.keyword', 30),
+  ]);
+
+  const shortOrganismes = organismes
+    .filter((name) => name.length <= 48)
+    .slice(0, 4);
+
+  const embeddedExamples = embeddedFilenames
+    .map((name) => String(name).replace(/^\//, ''))
+    .filter((name) => !/Thumbs|image\d|Feuille/i.test(name))
+    .map((name) => name.replace(/\.(pdf|doc|docx)$/i, ''))
+    .filter((name, index, all) => all.indexOf(name) === index)
+    .slice(0, 5);
+
+  tooltipCache = {
+    q: tip(
+      'Texte libre cherché dans le contenu des dossiers (PDF, Word, etc.).',
+      'logiciel, nettoyage, formation',
+    ),
+    q_field: 'Champ dans lequel appliquer la recherche principale (contenu des fichiers, intitulé, objet, ou les trois).',
+    exclude: tip(
+      'Retire les dossiers qui contiennent ces mots.',
+      'maintenance, renouvellement',
+    ),
+    phrase: 'Les mots de la recherche principale doivent apparaître à la suite, dans cet ordre.',
+    intitule: tip('Titre court de la consultation.', 'fourniture, travaux, prestation'),
+    objet: tip('Description détaillée de la consultation, souvent plus complète que l’intitulé.', 'maintenance, assistance'),
+    reference: tip('Référence interne de la consultation chez l’acheteur.', '2024-01, 26-MAPA'),
+    reglement_ref: 'Identifiant technique du règlement de consultation sur PLACE (souvent encodé).',
+    organisme: tip('Catégorie d’acheteur public telle qu’affichée sur PLACE.', formatExamples(shortOrganismes)),
+    entite_achat: tip(
+      'Service ou direction acheteuse, plus précis que l’organisme.',
+      'direction des achats, SGAMI',
+    ),
+    org_acronym: tip('Code PLACE de l’organisme acheteur.', formatExamples(orgAcronyms)),
+    annonce_id: tip('Identifiant numérique PLACE de la consultation.', '3046429'),
+    lieu_execution: tip(
+      'Lieu où le marché sera exécuté (département, ville, ou FRANCE).',
+      '(75) Paris, (66) Pyrénées-Orientales, FRANCE',
+    ),
+    code_cpv: tip(
+      'Code CPV du vocabulaire commun des marchés publics (nature des prestations).',
+      '45000000, 72000000, 90000000',
+    ),
+    categorie_principale: 'Grande famille PLACE du marché : Travaux, Fournitures ou Services.',
+    procedure: tip(
+      'Type de procédure de passation.',
+      'Procédure adaptée, Appel d’offres ouvert, Marché négocié',
+    ),
+    allotissement: 'Indique si la consultation est découpée en lots (Alloti) ou non (Non alloti).',
+    date_limite: 'Borne sur la date limite de remise des plis (date d’échéance des offres).',
+    ouverte: 'Ne garde que les consultations dont la date limite de remise des plis est encore à venir.',
+    fetch_date: 'Borne sur la date à laquelle Better Place a téléchargé le dossier depuis PLACE.',
+    fetch_days: tip('Raccourci pour ne garder que les dossiers téléchargés récemment.', '7, 30'),
+    has_files: 'Ne garde que les consultations pour lesquelles le fichier correspondant est disponible.',
+    embedded_filename: tip(
+      'Cherche dans les noms de fichiers contenus dans les archives (DCE, règlement, avis…).',
+      formatExamples(embeddedExamples),
+    ),
+    size: tip('Filtre sur la taille de l’archive DCE, en mégaoctets.', '1, 50'),
+    sort: 'Ordre d’affichage des résultats. La pertinence utilise le score Elasticsearch.',
+  };
+  tooltipCacheAt = Date.now();
+  return tooltipCache;
+}
+
 // Kept for callers that still import the old name.
 function generateMatchQueriesFromRequest(expressQuery) {
   const { query } = buildSearchQuery(expressQuery);
@@ -345,4 +455,5 @@ module.exports = {
   buildSort,
   extractSearchForm,
   buildSearchPath,
+  getSearchTooltips,
 };

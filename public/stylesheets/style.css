@@ -24,3 +24,24 @@ body {
 #searchfilters .inline.fields > label {
   margin-right: 1.5em;
 }
+.filter-hint {
+  color: #666;
+  margin: 0.5em 0 1em;
+}
+i.tip {
+  cursor: help;
+  opacity: 0.45;
+  margin-left: 0.15em;
+  font-size: 0.95em;
+}
+i.tip:hover,
+label:hover > i.tip {
+  opacity: 0.9;
+}
+/* Keep Semantic UI CSS tooltips readable above the dense form */
+[data-tooltip]:after {
+  white-space: normal;
+  max-width: 22rem;
+  line-height: 1.35;
+  text-align: left;
+}
