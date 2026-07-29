@@ -17,6 +17,31 @@ var accessLogStream = rfs.createStream("access.log", {
   path: path.join(__dirname, "../log"),
 });
 
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function tipHelper(text) {
+  if (!text) {
+    return "";
+  }
+  const escaped = escapeHtml(text);
+  const html =
+    `<span class="tip" tabindex="0" data-tooltip="${escaped}" data-position="bottom left" data-inverted="">` +
+    `<i class="info circle icon" aria-hidden="true"></i>` +
+    `</span>`;
+  return {
+    toHTML() {
+      return html;
+    },
+  };
+}
+
 // view engine setup
 app.engine(
   "handlebars",
@@ -26,6 +51,7 @@ app.engine(
       eq: (a, b) => a === b,
       selected: (a, b) => (a === b ? "selected" : ""),
       checked: (value) => (value ? "checked" : ""),
+      tip: tipHelper,
     },
   }),
 );

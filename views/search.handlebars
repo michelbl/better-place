@@ -2,13 +2,7 @@
   <div class="fields">
     <div class="ten wide field">
       <label>
-        Contenu
-        <i
-          class="info circle icon tip"
-          data-tooltip="{{tooltips.q}}"
-          data-position="top left"
-          data-variation="wide"
-        ></i>
+        Contenu {{tip tooltips.q}}
       </label>
       <input
         type="text"
@@ -33,22 +27,14 @@
 
   <div id="searchfilters" style="display: {{#if filtersOpen}}block{{else}}none{{/if}};">
     <p class="filter-hint">
-      Survolez l’icône
-      <i class="info circle icon tip"></i>
-      pour une explication et des exemples fréquents.
+      Survolez l’icône <i class="info circle icon"></i> pour une explication et des exemples fréquents.
     </p>
 
     <h4 class="ui dividing header">Recherche textuelle</h4>
     <div class="fields">
       <div class="four wide field">
         <label>
-          Champ ciblé
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.q_field}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Champ ciblé {{tip tooltips.q_field}}
         </label>
         <select name="q_field" class="ui dropdown">
           <option value="content" {{selected q_field "content"}}>Contenu</option>
@@ -59,13 +45,7 @@
       </div>
       <div class="six wide field">
         <label>
-          Exclure
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.exclude}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Exclure {{tip tooltips.exclude}}
         </label>
         <input
           type="text"
@@ -78,13 +58,7 @@
         <label>&nbsp;</label>
         <label>
           <input type="checkbox" name="phrase" value="1" {{checked phrase}} />
-          Phrase exacte
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.phrase}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Phrase exacte {{tip tooltips.phrase}}
         </label>
       </div>
     </div>
@@ -93,49 +67,25 @@
     <div class="fields">
       <div class="four wide field">
         <label>
-          Intitulé
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.intitule}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Intitulé {{tip tooltips.intitule}}
         </label>
         <input type="text" name="intitule" value="{{intitule}}" placeholder="ex. fourniture" />
       </div>
       <div class="four wide field">
         <label>
-          Objet
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.objet}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Objet {{tip tooltips.objet}}
         </label>
         <input type="text" name="objet" value="{{objet}}" placeholder="ex. maintenance" />
       </div>
       <div class="four wide field">
         <label>
-          Référence
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.reference}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Référence {{tip tooltips.reference}}
         </label>
         <input type="text" name="reference" value="{{reference}}" placeholder="ex. 2024-01" />
       </div>
       <div class="four wide field">
         <label>
-          Référence du règlement
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.reglement_ref}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Référence du règlement {{tip tooltips.reglement_ref}}
         </label>
         <input type="text" name="reglement_ref" value="{{reglement_ref}}" />
       </div>
@@ -143,49 +93,25 @@
     <div class="fields">
       <div class="four wide field">
         <label>
-          Organisme
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.organisme}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Organisme {{tip tooltips.organisme}}
         </label>
         <input type="text" name="organisme" value="{{organisme}}" placeholder="ex. Ministère des armées" />
       </div>
       <div class="four wide field">
         <label>
-          Entité d'achat
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.entite_achat}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Entité d'achat {{tip tooltips.entite_achat}}
         </label>
         <input type="text" name="entite_achat" value="{{entite_achat}}" placeholder="ex. direction des achats" />
       </div>
       <div class="four wide field">
         <label>
-          Acronyme organisme
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.org_acronym}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Acronyme organisme {{tip tooltips.org_acronym}}
         </label>
         <input type="text" name="org_acronym" value="{{org_acronym}}" placeholder="ex. x7c, f2h" />
       </div>
       <div class="four wide field">
         <label>
-          Identifiant d'annonce
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.annonce_id}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Identifiant d'annonce {{tip tooltips.annonce_id}}
         </label>
         <input type="text" name="annonce_id" value="{{annonce_id}}" placeholder="ex. 3046429" />
       </div>
@@ -193,37 +119,19 @@
     <div class="fields">
       <div class="four wide field">
         <label>
-          Lieu d'exécution
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.lieu_execution}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Lieu d'exécution {{tip tooltips.lieu_execution}}
         </label>
         <input type="text" name="lieu_execution" value="{{lieu_execution}}" placeholder="ex. (75) Paris" />
       </div>
       <div class="four wide field">
         <label>
-          Code CPV
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.code_cpv}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Code CPV {{tip tooltips.code_cpv}}
         </label>
         <input type="text" name="code_cpv" value="{{code_cpv}}" placeholder="ex. 72000000" />
       </div>
       <div class="four wide field">
         <label>
-          Catégorie principale
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.categorie_principale}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Catégorie principale {{tip tooltips.categorie_principale}}
         </label>
         <select name="categorie_principale" class="ui dropdown">
           <option value="" {{selected categorie_principale ""}}>—</option>
@@ -234,13 +142,7 @@
       </div>
       <div class="four wide field">
         <label>
-          Procédure
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.procedure}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Procédure {{tip tooltips.procedure}}
         </label>
         <input type="text" name="procedure" value="{{procedure}}" placeholder="ex. adaptée" />
       </div>
@@ -248,13 +150,7 @@
     <div class="fields">
       <div class="four wide field">
         <label>
-          Allotissement
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.allotissement}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Allotissement {{tip tooltips.allotissement}}
         </label>
         <select name="allotissement" class="ui dropdown">
           <option value="" {{selected allotissement ""}}>—</option>
@@ -268,25 +164,13 @@
     <div class="fields">
       <div class="four wide field">
         <label>
-          Date limite (début)
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.date_limite}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Date limite (début) {{tip tooltips.date_limite}}
         </label>
         <input type="date" name="date_limite_min" value="{{date_limite_min}}" />
       </div>
       <div class="four wide field">
         <label>
-          Date limite (fin)
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.date_limite}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Date limite (fin) {{tip tooltips.date_limite}}
         </label>
         <input type="date" name="date_limite_max" value="{{date_limite_max}}" />
       </div>
@@ -294,50 +178,26 @@
         <label>&nbsp;</label>
         <label>
           <input type="checkbox" name="ouverte" value="1" {{checked ouverte}} />
-          Encore ouverte
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.ouverte}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Encore ouverte {{tip tooltips.ouverte}}
         </label>
       </div>
     </div>
     <div class="fields">
       <div class="four wide field">
         <label>
-          Téléchargement (début)
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.fetch_date}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Téléchargement (début) {{tip tooltips.fetch_date}}
         </label>
         <input type="date" name="fetch_min" value="{{fetch_min}}" />
       </div>
       <div class="four wide field">
         <label>
-          Téléchargement (fin)
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.fetch_date}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Téléchargement (fin) {{tip tooltips.fetch_date}}
         </label>
         <input type="date" name="fetch_max" value="{{fetch_max}}" />
       </div>
       <div class="four wide field">
         <label>
-          Derniers N jours
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.fetch_days}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Derniers N jours {{tip tooltips.fetch_days}}
         </label>
         <input type="number" name="fetch_days" value="{{fetch_days}}" min="1" step="1" placeholder="ex. 7" />
       </div>
@@ -347,13 +207,7 @@
     <div class="inline fields">
       <label>
         <input type="checkbox" name="has_dce" value="1" {{checked has_dce}} />
-        Avec DCE
-        <i
-          class="info circle icon tip"
-          data-tooltip="{{tooltips.has_files}}"
-          data-position="top left"
-          data-variation="wide"
-        ></i>
+        Avec DCE {{tip tooltips.has_files}}
       </label>
       <label>
         <input type="checkbox" name="has_avis" value="1" {{checked has_avis}} />
@@ -371,13 +225,7 @@
     <div class="fields">
       <div class="eight wide field">
         <label>
-          Nom de fichier embarqué
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.embedded_filename}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Nom de fichier embarqué {{tip tooltips.embedded_filename}}
         </label>
         <input
           type="text"
@@ -388,25 +236,13 @@
       </div>
       <div class="four wide field">
         <label>
-          Taille DCE min (Mo)
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.size}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Taille DCE min (Mo) {{tip tooltips.size}}
         </label>
         <input type="number" name="size_min" value="{{size_min}}" min="0" step="0.1" placeholder="ex. 1" />
       </div>
       <div class="four wide field">
         <label>
-          Taille DCE max (Mo)
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.size}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Taille DCE max (Mo) {{tip tooltips.size}}
         </label>
         <input type="number" name="size_max" value="{{size_max}}" min="0" step="0.1" placeholder="ex. 50" />
       </div>
@@ -416,13 +252,7 @@
     <div class="fields">
       <div class="eight wide field">
         <label>
-          Ordre des résultats
-          <i
-            class="info circle icon tip"
-            data-tooltip="{{tooltips.sort}}"
-            data-position="top left"
-            data-variation="wide"
-          ></i>
+          Ordre des résultats {{tip tooltips.sort}}
         </label>
         <select name="sort" class="ui dropdown">
           <option value="relevance" {{selected sort "relevance"}}>Pertinence</option>
