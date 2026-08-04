@@ -3,6 +3,7 @@ const esClient = require('../elasticsearch_client');
 const config = require('../config');
 const {
   extractFrom,
+  capHitsForPagination,
   getDay,
   buildSearchQuery,
   buildSort,
@@ -25,7 +26,7 @@ router.get('/', async function(req, res, next) {
     const form = extractSearchForm(req.query);
     const { hasCriteria, query } = buildSearchQuery(req.query);
     const sort = buildSort(req.query);
-    const from = extractFrom(req);
+    const from = extractFrom(req, MAX_NB_HITS);
     const tooltips = await getSearchTooltips();
 
     if (!hasCriteria) {
@@ -92,9 +93,10 @@ router.get('/', async function(req, res, next) {
     }
 
     const getPagination = function(expressQuery, from, pageSize, nbHits) {
+      const browsableHits = capHitsForPagination(nbHits);
       const currentPageIndex = Math.round(from / pageSize) + 1;
       const previousPageIndex = currentPageIndex - 1;
-      const isLastPage = nbHits <= (currentPageIndex * pageSize);
+      const isLastPage = browsableHits <= (currentPageIndex * pageSize);
       const nextPageIndex = !isLastPage && (currentPageIndex + 1);
 
       const firstPageHref = buildSearchPath(expressQuery, 0);

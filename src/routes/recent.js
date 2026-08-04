@@ -1,7 +1,7 @@
 const express = require('express');
 const config = require('../config');
 const esClient = require('../elasticsearch_client'); 
-const { getDocCount, extractFrom, getDay } = require('../utils');
+const { getDocCount, extractFrom, capHitsForPagination, getDay } = require('../utils');
 
 const NB_LAST = 50;
 
@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get('/', async function(req, res, next) {
   try {
-    const from = extractFrom(req);
+    const from = extractFrom(req, NB_LAST);
 
 
     const docCount = await getDocCount();
@@ -45,11 +45,12 @@ router.get('/', async function(req, res, next) {
 
 
     const getPagination = function(from, pageSize, nbHits) {
+      const browsableHits = capHitsForPagination(nbHits);
       const currentPageIndex = Math.round(from / pageSize) + 1;
       const previousPageIndex = currentPageIndex - 1;
-      const isLastPage = nbHits <= (currentPageIndex  * pageSize);
+      const isLastPage = browsableHits <= (currentPageIndex  * pageSize);
       const nextPageIndex = !isLastPage && (currentPageIndex + 1);
-      const lastPageIndex = Math.ceil(nbHits / pageSize);
+      const lastPageIndex = Math.max(1, Math.ceil(browsableHits / pageSize));
     
       const firstPageHref = `/recent`;
       const previousPageHref = `/recent?from=${(previousPageIndex - 1) * pageSize}`;

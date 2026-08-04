@@ -37,8 +37,21 @@ const FILE_PRESENCE_FIELDS = {
   has_complement: 'filename_complement',
 };
 
-function extractFrom(req) {
-  return parseInt(req.query.from, 10) || 0;
+// Elasticsearch default index.max_result_window; from + size must stay within this.
+const MAX_RESULT_WINDOW = 10000;
+
+function extractFrom(req, pageSize) {
+  const parsed = parseInt(req.query.from, 10);
+  const from = Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
+  if (pageSize == null) {
+    return from;
+  }
+  const maxFrom = Math.max(0, MAX_RESULT_WINDOW - pageSize);
+  return Math.min(from, maxFrom);
+}
+
+function capHitsForPagination(nbHits) {
+  return Math.min(nbHits, MAX_RESULT_WINDOW);
 }
 
 function isEmpty(stringVar) {
@@ -447,7 +460,9 @@ function generateMatchQueriesFromRequest(expressQuery) {
 }
 
 module.exports = {
+  MAX_RESULT_WINDOW,
   extractFrom,
+  capHitsForPagination,
   getDay,
   getDocCount,
   generateMatchQueriesFromRequest,
